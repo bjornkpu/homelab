@@ -1,0 +1,49 @@
+# Traefik Dynamic Configuration - Middlewares
+# Auto-reloads when file changes (no restart needed)
+
+http:
+  middlewares:
+    # Restrict access to internal network only
+    internal-only:
+      ipAllowList:
+        sourceRange:
+          - "192.168.0.0/16"      # All 192.168.x.x private networks
+          - "193.71.242.0/24"     # Your actual source network
+          - "172.16.0.0/12"       # Docker networks
+          - "10.0.0.0/8"          # Private class A
+          - "127.0.0.1/32"        # Localhost
+          # Add VPN range when WireGuard is migrated
+
+    # Security headers (optional, can cause issues with some apps)
+    security-headers:
+      headers:
+        sslRedirect: true
+        forceSTSHeader: true
+        stsSeconds: 31536000
+        stsIncludeSubdomains: true
+        stsPreload: true
+        contentTypeNosniff: true
+        browserXssFilter: true
+        referrerPolicy: "same-origin"
+        frameDeny: true
+        customFrameOptionsValue: "SAMEORIGIN"
+
+    # Pocket ID authentication (when you deploy it)
+    pocket-id-auth:
+      forwardAuth:
+        address: "http://pocket-id:3000/api/auth"
+        trustForwardHeader: true
+        authResponseHeaders:
+          - "X-Forwarded-User"
+          - "X-Forwarded-Email"
+
+    # Rate limiting (optional, for public services)
+    rate-limit:
+      rateLimit:
+        average: 100
+        burst: 50
+        period: 1m
+
+    # Compression
+    compression:
+      compress: {}
