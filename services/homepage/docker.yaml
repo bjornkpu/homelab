@@ -1,0 +1,6 @@
+---
+# Docker socket configuration for Homepage
+# https://gethomepage.dev/configs/docker/
+
+truenas:
+  socket: /var/run/docker.sock

@@ -1,0 +1,51 @@
+---
+# Homepage Settings
+# https://gethomepage.dev/configs/settings/
+
+title: Punsvik Homelab
+
+theme: dark
+color: slate
+
+background:
+  image: https://images.unsplash.com/photo-1475274047050-1d0c0975c63e?w=1920
+  blur: sm
+  opacity: 50
+
+cardBlur: md
+
+favicon: https://raw.githubusercontent.com/gethomepage/homepage/main/public/homepage.png
+
+headerStyle: clean
+
+layout:
+  Home Automation:
+    style: row
+    columns: 1
+  Productivity:
+    style: row
+    columns: 1
+  Food & Recipes:
+    style: row
+    columns: 4
+  Finance:
+    style: row
+    columns: 1
+  Data & Storage:
+    style: row
+    columns: 2
+  Utilities:
+    style: row
+    columns: 3
+  Analytics:
+    style: row
+    columns: 1
+  Infrastructure:
+    style: row
+    columns: 5
+  Gaming:
+    style: row
+    columns: 1
+
+# Status style for services
+statusStyle: dot
