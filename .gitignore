@@ -1,0 +1,4 @@
+.env
+logs/
+.claude/
+CLAUDE.md
