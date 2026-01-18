@@ -1,0 +1,47 @@
+services:
+  blocky:
+    image: spx01/blocky:latest
+    container_name: blocky
+    restart: unless-stopped
+    user: "568:568"
+    ports:
+      - "192.168.1.4:53:53/tcp"
+      - "192.168.1.4:53:53/udp"
+      - "4000:4000/tcp" # metrics/API (HTTP)
+    environment:
+      - TZ=Europe/Oslo
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - ./config.yml:/app/config.yml:ro
+      - /mnt/main/appdata/blocky/logs:/logs
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.blocky-metrics.entrypoints=websecure"
+      - "traefik.http.routers.blocky-metrics.rule=Host(`dns.punsvik.net`) && Path(`/metrics`)"
+      - "traefik.http.routers.blocky-metrics.tls.certresolver=le"
+      - "traefik.http.routers.blocky-metrics.middlewares=internal-only@file"
+      - "traefik.http.services.blocky-metrics.loadbalancer.server.port=4000"
+    networks:
+      - traefik
+
+  blocky-ui:
+    image: ghcr.io/gabeduartem/blocky-ui:latest
+    container_name: blocky-ui
+    restart: unless-stopped
+    depends_on:
+      - blocky
+    environment:
+      - BLOCKY_API_URL=http://blocky:4000
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.blocky-ui.entrypoints=websecure"
+      - "traefik.http.routers.blocky-ui.rule=Host(`dns.punsvik.net`)"
+      - "traefik.http.routers.blocky-ui.tls.certresolver=le"
+      - "traefik.http.routers.blocky-ui.middlewares=internal-only@file"
+      - "traefik.http.services.blocky-ui.loadbalancer.server.port=3000"
+    networks:
+      - traefik
+
+networks:
+  traefik:
+    external: true
