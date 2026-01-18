@@ -1,0 +1,22 @@
+# Traefik Dynamic Configuration - Homepage (TrueNAS App)
+# Internal-only reverse proxy to TrueNAS app on port 30054
+
+http:
+  routers:
+    homepage:
+      rule: "Host(`homepage.punsvik.net`)"
+      entryPoints:
+        - websecure
+      service: homepage-svc
+      tls:
+        certResolver: le
+      middlewares:
+        - internal-only@file
+        - security-headers@file
+
+  services:
+    homepage-svc:
+      loadBalancer:
+        passHostHeader: true
+        servers:
+          - url: "http://192.168.1.4:30054"

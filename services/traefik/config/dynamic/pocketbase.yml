@@ -1,0 +1,26 @@
+# Traefik Dynamic Configuration - PocketBase (K8s Backend)
+# Proxies db.shopping-list.furuknappen.no to K8s ingress at 192.168.1.20:443
+
+http:
+  routers:
+    pocketbase:
+      rule: "Host(`db.shopping-list.furuknappen.no`)"
+      entryPoints:
+        - websecure
+      service: pocketbase-svc
+      tls:
+        certResolver: le
+      middlewares:
+        - security-headers@file
+
+  services:
+    pocketbase-svc:
+      loadBalancer:
+        passHostHeader: true
+        serversTransport: pocketbase-sni
+        servers:
+          - url: "https://192.168.1.20:443"
+
+  serversTransports:
+    pocketbase-sni:
+      serverName: db.shopping-list.furuknappen.no

@@ -1,0 +1,28 @@
+# Traefik Dynamic Configuration - TrueNAS Web UI
+# Proxies nas.punsvik.net to TrueNAS at 192.168.1.4:444 (internal only)
+
+http:
+  routers:
+    truenas:
+      rule: "Host(`nas.punsvik.net`)"
+      entryPoints:
+        - websecure
+      service: truenas-svc
+      tls:
+        certResolver: le
+      middlewares:
+        - internal-only@file
+        - security-headers@file
+
+  services:
+    truenas-svc:
+      loadBalancer:
+        passHostHeader: true
+        serversTransport: truenas-sni
+        servers:
+          - url: "https://192.168.1.4:444"
+
+  serversTransports:
+    truenas-sni:
+      serverName: nas.punsvik.net
+      insecureSkipVerify: true
