@@ -1,0 +1,18 @@
+http:
+  routers:
+    umami:
+      rule: "Host(`analytics.furuknappen.no`)"
+      entryPoints:
+        - websecure
+      service: umami-svc
+      tls:
+        certResolver: le
+      middlewares:
+        - security-headers@file
+
+  services:
+    umami-svc:
+      loadBalancer:
+        passHostHeader: true
+        servers:
+          - url: "http://192.168.1.4:30060"

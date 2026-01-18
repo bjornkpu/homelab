@@ -1,0 +1,48 @@
+# Traefik Dynamic Configuration - Home Assistant via K8s IP
+# Proxies home.punsvik.net to 192.168.1.20:8123
+
+http:
+  routers:
+    home-assistant:
+      rule: "Host(`home.punsvik.net`)"
+      entryPoints:
+        - websecure
+      service: home-assistant-svc
+      tls:
+        certResolver: le
+      middlewares:
+        - security-headers@file
+        
+  services:
+    home-assistant-svc:
+      loadBalancer:
+        passHostHeader: true
+        serversTransport: ha-sni
+        servers:
+          - url: "https://192.168.1.20:443"
+
+  serversTransports:
+    ha-sni:
+      serverName: home.punsvik.net
+
+# If your backend uses self-signed certs, set:
+# serversTransports:
+#   ha-sni:
+#     serverName: home.punsvik.net
+#     insecureSkipVerify: true
+
+# Alternative (end-to-end TLS without Traefik termination):
+# Use TLS passthrough. Note: Middlewares and headers won't apply.
+# http:
+#   routers:
+#     home-assistant:
+#       rule: "Host(`home.punsvik.net`)"
+#       entryPoints:
+#         - websecure
+#       tls:
+#         passthrough: true
+#   services:
+#     home-assistant:
+#       loadBalancer:
+#         servers:
+#           - url: "https://192.168.1.20:443"

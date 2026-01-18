@@ -1,0 +1,21 @@
+# Traefik Dynamic Configuration - Actual Budget (TrueNAS App)
+# Proxies budget.furuknappen.no to TrueNAS app on port 31012
+
+http:
+  routers:
+    actual-budget-furuknappen:
+      rule: "Host(`budget.furuknappen.no`)"
+      entryPoints:
+        - websecure
+      service: actual-budget-furuknappen-svc
+      tls:
+        certResolver: le
+      middlewares:
+        - security-headers@file
+
+  services:
+    actual-budget-furuknappen-svc:
+      loadBalancer:
+        passHostHeader: true
+        servers:
+          - url: "http://192.168.1.4:31012"

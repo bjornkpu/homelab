@@ -1,0 +1,21 @@
+# Traefik Dynamic Configuration - NocoDB (TrueNAS App)
+# Proxies db.furuknappen.no to TrueNAS app on port 30183 (HTTP)
+
+http:
+  routers:
+    nocodb:
+      rule: "Host(`db.furuknappen.no`)"
+      entryPoints:
+        - websecure
+      service: nocodb-svc
+      tls:
+        certResolver: le
+      middlewares:
+        - security-headers@file
+
+  services:
+    nocodb-svc:
+      loadBalancer:
+        passHostHeader: true
+        servers:
+          - url: "http://192.168.1.4:30183"

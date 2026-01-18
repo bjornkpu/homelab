@@ -1,0 +1,18 @@
+http:
+  routers:
+    memos:
+      rule: "Host(`memos.punsvik.net`)"
+      entryPoints:
+        - websecure
+      service: memos-svc
+      tls:
+        certResolver: le
+      middlewares:
+        - security-headers@file
+
+  services:
+    memos-svc:
+      loadBalancer:
+        passHostHeader: true
+        servers:
+          - url: "http://192.168.1.4:30311"
