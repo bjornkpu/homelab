@@ -10,6 +10,13 @@
         siteMonitor: https://home.punsvik.net
 
 - Productivity:
+    - Outline:
+        icon: outline.png
+        href: https://outline.punsvik.net
+        description: Team wiki & documentation [TrueNAS]
+        siteMonitor: https://outline.punsvik.net
+        server: truenas
+        container: ix-outline-outline-1
     - Memos:
         icon: memos.png
         href: https://memos.punsvik.net
@@ -65,11 +72,18 @@
         container: ix-nocodb-nocodb-1
     - PocketBase:
         icon: pocketbase.png
-        href: https://db.shopping-list.furuknappen.no
+        href: https://db.shopping-list.furuknappen.no/_/#/login
         description: Backend for Shopping List [K8s]
-        siteMonitor: https://db.shopping-list.furuknappen.no
+        siteMonitor: https://db.shopping-list.furuknappen.no/_/#/login
 
 - Utilities:
+    - Pocket ID:
+        icon: mdi-shield-account
+        href: https://auth.punsvik.net
+        description: Authentication & SSO [TrueNAS]
+        siteMonitor: https://auth.punsvik.net
+        server: truenas
+        container: ix-pocket-id-pocket-id-1
     - ConvertX:
         icon: mdi-file-swap-outline
         href: https://convertx.punsvik.net
@@ -89,6 +103,7 @@
         href: https://obsidian.punsvik.net
         description: Obsidian sync backend [K8s]
         siteMonitor: https://obsidian.punsvik.net
+    
 
 - Analytics:
     - Umami:
@@ -129,6 +144,12 @@
         description: Dashboard [TrueNAS]
         server: truenas
         container: ix-homepage-homepage-1
+    - Dozzle:
+        icon: dozzle.png
+        href: https://logs.punsvik.net
+        description: Docker container logs viewer [TrueNAS]
+        server: truenas
+        container: ix-dozzle-dozzle-1
 
 - Gaming:
     - Minecraft:
