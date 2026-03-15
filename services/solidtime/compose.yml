@@ -1,0 +1,66 @@
+# Solidtime - Open-source time tracker for freelancers and agencies
+# https://docs.solidtime.io/self-hosting/guides/docker
+#
+# First-run:
+#   1. Copy .env.example → .env and laravel.env.example → laravel.env, fill in secrets
+#   2. Generate keys (run once, from this directory):
+#        docker compose run --rm solidtime php artisan self-host:generate-keys
+#      Copy APP_KEY, PASSPORT_PRIVATE_KEY, PASSPORT_PUBLIC_KEY into laravel.env
+#   3. docker compose up -d  (migrations run automatically via AUTO_DB_MIGRATE)
+
+services:
+  solidtime:
+    image: solidtime/solidtime:${SOLIDTIME_IMAGE_TAG:-0.11}
+    container_name: solidtime
+    restart: unless-stopped
+    depends_on:
+      solidtime-db:
+        condition: service_healthy
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.solidtime.rule=Host(`solidtime.punsvik.net`)"
+      - "traefik.http.routers.solidtime.entrypoints=websecure"
+      - "traefik.http.routers.solidtime.tls.certresolver=le"
+      - "traefik.http.routers.solidtime.middlewares=security-headers@file"
+      - "traefik.http.services.solidtime.loadbalancer.server.port=8000"
+    env_file: laravel.env
+    environment:
+      CONTAINER_MODE: http
+      AUTO_DB_MIGRATE: "true"
+    healthcheck:
+      test: ["CMD", "curl", "--fail", "http://localhost:8000/health-check/up"]
+      interval: 30s
+      retries: 3
+      timeout: 5s
+    volumes:
+      - /mnt/main/appdata/solidtime/storage:/var/www/html/storage/app
+      - /mnt/main/appdata/solidtime/logs:/var/www/html/storage/logs
+    networks:
+      - traefik
+      - solidtime-internal
+
+  solidtime-db:
+    image: postgres:17
+    container_name: solidtime-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${DB_DATABASE}
+      POSTGRES_USER: ${DB_USERNAME}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - /mnt/main/appdata/solidtime/db:/var/lib/postgresql/data
+    networks:
+      - solidtime-internal
+    healthcheck:
+      test: ["CMD", "pg_isready", "-q", "-d", "solidtime", "-U", "solidtime"]
+      interval: 10s
+      retries: 5
+      timeout: 5s
+      start_period: 30s
+
+networks:
+  traefik:
+    external: true
+    name: traefik
+  solidtime-internal:
+    driver: bridge
