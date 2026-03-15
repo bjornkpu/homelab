@@ -1,0 +1,110 @@
+- id: '1744829172328'
+  alias: Night on charging
+  description: ''
+  triggers:
+  - trigger: state
+    entity_id:
+    - sensor.bk_phone_charger_type
+    to: wireless
+  conditions:
+  - condition: time
+    after: '21:00:00'
+    before: 01:30:00
+    weekday:
+    - mon
+    - tue
+    - wed
+    - thu
+    - fri
+    - sat
+    - sun
+  actions:
+  - action: scene.turn_on
+    metadata: {}
+    data:
+      transition: 5
+    target:
+      entity_id: scene.night_mode
+  mode: single
+- id: '1744833575546'
+  alias: Evening
+  description: ''
+  triggers:
+  - trigger: time
+    at: '21:00:00'
+  conditions:
+  - condition: or
+    conditions:
+    - condition: device
+      device_id: 90f1a03ca8277cb1d89fea5325a99b78
+      domain: device_tracker
+      entity_id: c834c7e7da8959ecdde31e59de2053f0
+      type: is_home
+    - condition: device
+      device_id: 29c50b188dd61d87982fe20f317889f1
+      domain: device_tracker
+      entity_id: b65a548a793c50d81f26bd924500b4e5
+      type: is_home
+  actions:
+  - action: scene.turn_on
+    metadata: {}
+    data:
+      transition: 20
+    target:
+      entity_id: scene.evning
+  mode: single
+- id: '1744833637322'
+  alias: Day
+  description: ''
+  triggers:
+  - trigger: time
+    at: 09:00:00
+  conditions:
+  - condition: or
+    conditions:
+    - condition: device
+      device_id: 29c50b188dd61d87982fe20f317889f1
+      domain: device_tracker
+      entity_id: b65a548a793c50d81f26bd924500b4e5
+      type: is_home
+    - condition: device
+      device_id: 90f1a03ca8277cb1d89fea5325a99b78
+      domain: device_tracker
+      entity_id: c834c7e7da8959ecdde31e59de2053f0
+      type: is_home
+  actions:
+  - action: scene.turn_on
+    metadata: {}
+    data:
+      transition: 20
+    target:
+      entity_id: scene.day
+  mode: single
+- id: '1744933122950'
+  alias: Morning mode
+  description: ''
+  triggers:
+  - trigger: state
+    entity_id:
+    - sensor.bk_phone_charger_type
+    to: none
+  conditions:
+  - condition: time
+    after: 06:00:00
+    before: 09:00:00
+    weekday:
+    - mon
+    - tue
+    - wed
+    - thu
+    - fri
+    - sat
+    - sun
+  actions:
+  - action: scene.turn_on
+    metadata: {}
+    data:
+      transition: 5
+    target:
+      entity_id: scene.morning
+  mode: single

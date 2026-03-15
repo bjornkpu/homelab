@@ -1,0 +1,993 @@
+- id: '1744828866020'
+  name: Night
+  entities:
+    light.ceiling_light:
+      min_color_temp_kelvin: 2202
+      max_color_temp_kelvin: 4000
+      min_mireds: 250
+      max_mireds: 454
+      supported_color_modes:
+      - color_temp
+      supported_features: 32
+      color_mode:
+      brightness:
+      color_temp_kelvin:
+      color_temp:
+      hs_color:
+      rgb_color:
+      xy_color:
+      friendly_name: ceiling light
+      state: 'off'
+    light.display_cabinet:
+      supported_color_modes:
+      - brightness
+      supported_features: 32
+      color_mode:
+      brightness:
+      friendly_name: Display Cabinet
+      state: 'off'
+    light.kitchen_light:
+      min_color_temp_kelvin: 2202
+      max_color_temp_kelvin: 4000
+      min_mireds: 250
+      max_mireds: 454
+      supported_color_modes:
+      - color_temp
+      supported_features: 32
+      color_mode:
+      brightness:
+      color_temp_kelvin:
+      color_temp:
+      hs_color:
+      rgb_color:
+      xy_color:
+      friendly_name: Kitchen Light
+      state: 'off'
+    light.night_light:
+      min_color_temp_kelvin: 2202
+      max_color_temp_kelvin: 4000
+      min_mireds: 250
+      max_mireds: 454
+      supported_color_modes:
+      - color_temp
+      supported_features: 32
+      color_mode:
+      brightness:
+      color_temp_kelvin:
+      color_temp:
+      hs_color:
+      rgb_color:
+      xy_color:
+      friendly_name: Night Light
+      state: 'off'
+    light.office_light:
+      min_color_temp_kelvin: 2202
+      max_color_temp_kelvin: 4000
+      min_mireds: 250
+      max_mireds: 454
+      supported_color_modes:
+      - color_temp
+      - hs
+      supported_features: 32
+      color_mode:
+      brightness:
+      color_temp_kelvin:
+      color_temp:
+      hs_color:
+      rgb_color:
+      xy_color:
+      friendly_name: Office light
+      state: 'off'
+    switch.iron:
+      friendly_name: Plant light
+      state: 'off'
+    light.shelf_light:
+      min_color_temp_kelvin: 2202
+      max_color_temp_kelvin: 4000
+      min_mireds: 250
+      max_mireds: 454
+      supported_color_modes:
+      - color_temp
+      supported_features: 32
+      color_mode:
+      brightness:
+      color_temp_kelvin:
+      color_temp:
+      hs_color:
+      rgb_color:
+      xy_color:
+      friendly_name: Shelf Light
+      state: 'off'
+    light.spot_light_1:
+      min_color_temp_kelvin: 2202
+      max_color_temp_kelvin: 4000
+      min_mireds: 250
+      max_mireds: 454
+      supported_color_modes:
+      - color_temp
+      supported_features: 32
+      color_mode:
+      brightness:
+      color_temp_kelvin:
+      color_temp:
+      hs_color:
+      rgb_color:
+      xy_color:
+      friendly_name: Spot Light 1
+      state: 'off'
+    light.spot_light_2:
+      min_color_temp_kelvin: 2202
+      max_color_temp_kelvin: 4000
+      min_mireds: 250
+      max_mireds: 454
+      supported_color_modes:
+      - color_temp
+      supported_features: 32
+      color_mode:
+      brightness:
+      color_temp_kelvin:
+      color_temp:
+      hs_color:
+      rgb_color:
+      xy_color:
+      friendly_name: Spot Light 2
+      state: 'off'
+    light.spot_light_3:
+      min_color_temp_kelvin: 2202
+      max_color_temp_kelvin: 4000
+      min_mireds: 250
+      max_mireds: 454
+      supported_color_modes:
+      - color_temp
+      supported_features: 32
+      color_mode:
+      brightness:
+      color_temp_kelvin:
+      color_temp:
+      hs_color:
+      rgb_color:
+      xy_color:
+      friendly_name: Spot Light 3
+      state: 'off'
+    light.window_light:
+      min_color_temp_kelvin: 2202
+      max_color_temp_kelvin: 4000
+      min_mireds: 250
+      max_mireds: 454
+      supported_color_modes:
+      - color_temp
+      - hs
+      supported_features: 32
+      color_mode:
+      brightness:
+      color_temp_kelvin:
+      color_temp:
+      hs_color:
+      rgb_color:
+      xy_color:
+      friendly_name: Window Light
+      state: 'off'
+  metadata: {}
+  icon: mdi:weather-night
+- id: '1744828894842'
+  name: Morning
+  entities:
+    light.ceiling_light:
+      min_color_temp_kelvin: 2202
+      max_color_temp_kelvin: 4000
+      min_mireds: 250
+      max_mireds: 454
+      supported_color_modes:
+      - color_temp
+      color_mode:
+      brightness:
+      color_temp_kelvin:
+      color_temp:
+      hs_color:
+      rgb_color:
+      xy_color:
+      friendly_name: ceiling light
+      supported_features: 32
+      state: 'off'
+    light.display_cabinet:
+      supported_color_modes:
+      - brightness
+      color_mode: brightness
+      brightness: 128
+      friendly_name: Display Cabinet
+      supported_features: 32
+      state: 'on'
+    light.kitchen_light:
+      min_color_temp_kelvin: 2202
+      max_color_temp_kelvin: 4000
+      min_mireds: 250
+      max_mireds: 454
+      supported_color_modes:
+      - color_temp
+      color_mode: color_temp
+      brightness: 76
+      color_temp_kelvin: 2702
+      color_temp: 370
+      hs_color:
+      - 28.391
+      - 65.659
+      rgb_color:
+      - 255
+      - 167
+      - 88
+      xy_color:
+      - 0.524
+      - 0.388
+      friendly_name: Kitchen Light
+      supported_features: 32
+      state: 'on'
+    light.office_light:
+      min_color_temp_kelvin: 2202
+      max_color_temp_kelvin: 4000
+      min_mireds: 250
+      max_mireds: 454
+      supported_color_modes:
+      - color_temp
+      - hs
+      color_mode: hs
+      brightness: 254
+      color_temp_kelvin:
+      color_temp:
+      hs_color:
+      - 30.834
+      - 61.567
+      rgb_color:
+      - 255
+      - 179
+      - 98
+      xy_color:
+      - 0.503
+      - 0.395
+      friendly_name: Office light
+      supported_features: 32
+      state: 'on'
+    light.shelf_light:
+      min_color_temp_kelvin: 2202
+      max_color_temp_kelvin: 4000
+      min_mireds: 250
+      max_mireds: 454
+      supported_color_modes:
+      - color_temp
+      color_mode: color_temp
+      brightness: 153
+      color_temp_kelvin: 2202
+      color_temp: 454
+      hs_color:
+      - 29.79
+      - 84.553
+      rgb_color:
+      - 255
+      - 146
+      - 39
+      xy_color:
+      - 0.579
+      - 0.388
+      friendly_name: Shelf Light
+      supported_features: 32
+      state: 'on'
+    light.spot_light_1:
+      min_color_temp_kelvin: 2202
+      max_color_temp_kelvin: 4000
+      min_mireds: 250
+      max_mireds: 454
+      supported_color_modes:
+      - color_temp
+      color_mode: color_temp
+      brightness: 76
+      color_temp_kelvin: 2202
+      color_temp: 454
+      hs_color:
+      - 29.79
+      - 84.553
+      rgb_color:
+      - 255
+      - 146
+      - 39
+      xy_color:
+      - 0.579
+      - 0.388
+      friendly_name: Spot Light 1
+      supported_features: 32
+      state: 'on'
+    light.spot_light_2:
+      min_color_temp_kelvin: 2202
+      max_color_temp_kelvin: 4000
+      min_mireds: 250
+      max_mireds: 454
+      supported_color_modes:
+      - color_temp
+      color_mode: color_temp
+      brightness: 76
+      color_temp_kelvin: 2202
+      color_temp: 454
+      hs_color:
+      - 29.79
+      - 84.553
+      rgb_color:
+      - 255
+      - 146
+      - 39
+      xy_color:
+      - 0.579
+      - 0.388
+      friendly_name: Spot Light 2
+      supported_features: 32
+      state: 'on'
+    light.spot_light_3:
+      min_color_temp_kelvin: 2202
+      max_color_temp_kelvin: 4000
+      min_mireds: 250
+      max_mireds: 454
+      supported_color_modes:
+      - color_temp
+      color_mode: color_temp
+      brightness: 76
+      color_temp_kelvin: 2202
+      color_temp: 454
+      hs_color:
+      - 29.79
+      - 84.553
+      rgb_color:
+      - 255
+      - 146
+      - 39
+      xy_color:
+      - 0.579
+      - 0.388
+      friendly_name: Spot Light 3
+      supported_features: 32
+      state: 'on'
+    light.window_light:
+      min_color_temp_kelvin: 2202
+      max_color_temp_kelvin: 4000
+      min_mireds: 250
+      max_mireds: 454
+      supported_color_modes:
+      - color_temp
+      - hs
+      color_mode: hs
+      brightness: 254
+      color_temp_kelvin:
+      color_temp:
+      hs_color:
+      - 29.878
+      - 80
+      rgb_color:
+      - 255
+      - 153
+      - 51
+      xy_color:
+      - 0.565
+      - 0.391
+      friendly_name: Window Light
+      supported_features: 32
+      state: 'on'
+  metadata: {}
+  icon: mdi:weather-sunset-up
+- id: '1744830492346'
+  name: Day
+  entities:
+    light.ceiling_light:
+      min_color_temp_kelvin: 2202
+      max_color_temp_kelvin: 4000
+      min_mireds: 250
+      max_mireds: 454
+      supported_color_modes:
+      - color_temp
+      color_mode:
+      brightness:
+      color_temp_kelvin:
+      color_temp:
+      hs_color:
+      rgb_color:
+      xy_color:
+      friendly_name: ceiling light
+      supported_features: 32
+      state: 'off'
+    light.display_cabinet:
+      supported_color_modes:
+      - brightness
+      color_mode: brightness
+      brightness: 254
+      friendly_name: Display Cabinet
+      supported_features: 32
+      state: 'on'
+    light.kitchen_light:
+      min_color_temp_kelvin: 2202
+      max_color_temp_kelvin: 4000
+      min_mireds: 250
+      max_mireds: 454
+      supported_color_modes:
+      - color_temp
+      color_mode: color_temp
+      brightness: 76
+      color_temp_kelvin: 2801
+      color_temp: 357
+      hs_color:
+      - 28.185
+      - 62.588
+      rgb_color:
+      - 255
+      - 170
+      - 95
+      xy_color:
+      - 0.516
+      - 0.386
+      friendly_name: Kitchen Light
+      supported_features: 32
+      state: 'on'
+    light.night_light:
+      min_color_temp_kelvin: 2202
+      max_color_temp_kelvin: 4000
+      min_mireds: 250
+      max_mireds: 454
+      supported_color_modes:
+      - color_temp
+      color_mode:
+      brightness:
+      color_temp_kelvin:
+      color_temp:
+      hs_color:
+      rgb_color:
+      xy_color:
+      friendly_name: Night Light
+      supported_features: 32
+      state: 'off'
+    light.office_light:
+      min_color_temp_kelvin: 2202
+      max_color_temp_kelvin: 4000
+      min_mireds: 250
+      max_mireds: 454
+      supported_color_modes:
+      - color_temp
+      - hs
+      color_mode: hs
+      brightness: 254
+      color_temp_kelvin:
+      color_temp:
+      hs_color:
+      - 30.834
+      - 61.567
+      rgb_color:
+      - 255
+      - 179
+      - 98
+      xy_color:
+      - 0.503
+      - 0.395
+      friendly_name: Office light
+      supported_features: 32
+      state: 'on'
+    light.shelf_light:
+      min_color_temp_kelvin: 2202
+      max_color_temp_kelvin: 4000
+      min_mireds: 250
+      max_mireds: 454
+      supported_color_modes:
+      - color_temp
+      color_mode: color_temp
+      brightness: 254
+      color_temp_kelvin: 2801
+      color_temp: 357
+      hs_color:
+      - 28.185
+      - 62.588
+      rgb_color:
+      - 255
+      - 170
+      - 95
+      xy_color:
+      - 0.516
+      - 0.386
+      friendly_name: Shelf Light
+      supported_features: 32
+      state: 'on'
+    light.spot_light_1:
+      min_color_temp_kelvin: 2202
+      max_color_temp_kelvin: 4000
+      min_mireds: 250
+      max_mireds: 454
+      supported_color_modes:
+      - color_temp
+      color_mode: color_temp
+      brightness: 153
+      color_temp_kelvin: 2801
+      color_temp: 357
+      hs_color:
+      - 28.185
+      - 62.588
+      rgb_color:
+      - 255
+      - 170
+      - 95
+      xy_color:
+      - 0.516
+      - 0.386
+      friendly_name: Spot Light 1
+      supported_features: 32
+      state: 'on'
+    light.spot_light_2:
+      min_color_temp_kelvin: 2202
+      max_color_temp_kelvin: 4000
+      min_mireds: 250
+      max_mireds: 454
+      supported_color_modes:
+      - color_temp
+      color_mode: color_temp
+      brightness: 153
+      color_temp_kelvin: 2801
+      color_temp: 357
+      hs_color:
+      - 28.185
+      - 62.588
+      rgb_color:
+      - 255
+      - 170
+      - 95
+      xy_color:
+      - 0.516
+      - 0.386
+      friendly_name: Spot Light 2
+      supported_features: 32
+      state: 'on'
+    light.spot_light_3:
+      min_color_temp_kelvin: 2202
+      max_color_temp_kelvin: 4000
+      min_mireds: 250
+      max_mireds: 454
+      supported_color_modes:
+      - color_temp
+      color_mode: color_temp
+      brightness: 153
+      color_temp_kelvin: 2801
+      color_temp: 357
+      hs_color:
+      - 28.185
+      - 62.588
+      rgb_color:
+      - 255
+      - 170
+      - 95
+      xy_color:
+      - 0.516
+      - 0.386
+      friendly_name: Spot Light 3
+      supported_features: 32
+      state: 'on'
+    light.window_light:
+      min_color_temp_kelvin: 2202
+      max_color_temp_kelvin: 4000
+      min_mireds: 250
+      max_mireds: 454
+      supported_color_modes:
+      - color_temp
+      - hs
+      color_mode: hs
+      brightness: 128
+      color_temp_kelvin:
+      color_temp:
+      hs_color:
+      - 30.834
+      - 61.567
+      rgb_color:
+      - 255
+      - 179
+      - 98
+      xy_color:
+      - 0.503
+      - 0.395
+      friendly_name: Window Light
+      supported_features: 32
+      state: 'on'
+    switch.iron:
+      friendly_name: Plant light
+      state: 'on'
+  metadata: {}
+  icon: mdi:weather-sunny
+- id: '1744830892923'
+  name: Evening
+  entities:
+    light.ceiling_light:
+      min_color_temp_kelvin: 2202
+      max_color_temp_kelvin: 4000
+      min_mireds: 250
+      max_mireds: 454
+      supported_color_modes:
+      - color_temp
+      color_mode:
+      brightness:
+      color_temp_kelvin:
+      color_temp:
+      hs_color:
+      rgb_color:
+      xy_color:
+      friendly_name: ceiling light
+      supported_features: 32
+      state: 'off'
+    light.display_cabinet:
+      supported_color_modes:
+      - brightness
+      color_mode:
+      brightness:
+      friendly_name: Display Cabinet
+      supported_features: 32
+      state: 'off'
+    light.kitchen_light:
+      min_color_temp_kelvin: 2202
+      max_color_temp_kelvin: 4000
+      min_mireds: 250
+      max_mireds: 454
+      supported_color_modes:
+      - color_temp
+      color_mode: color_temp
+      brightness: 76
+      color_temp_kelvin: 2202
+      color_temp: 454
+      hs_color:
+      - 29.79
+      - 84.553
+      rgb_color:
+      - 255
+      - 146
+      - 39
+      xy_color:
+      - 0.579
+      - 0.388
+      friendly_name: Kitchen Light
+      supported_features: 32
+      state: 'on'
+    light.night_light:
+      min_color_temp_kelvin: 2202
+      max_color_temp_kelvin: 4000
+      min_mireds: 250
+      max_mireds: 454
+      supported_color_modes:
+      - color_temp
+      color_mode: color_temp
+      brightness: 26
+      color_temp_kelvin: 2202
+      color_temp: 454
+      hs_color:
+      - 29.79
+      - 84.553
+      rgb_color:
+      - 255
+      - 146
+      - 39
+      xy_color:
+      - 0.579
+      - 0.388
+      friendly_name: Night Light
+      supported_features: 32
+      state: 'on'
+    light.office_light:
+      min_color_temp_kelvin: 2202
+      max_color_temp_kelvin: 4000
+      min_mireds: 250
+      max_mireds: 454
+      supported_color_modes:
+      - color_temp
+      - hs
+      color_mode: hs
+      brightness: 254
+      color_temp_kelvin:
+      color_temp:
+      hs_color:
+      - 29.878
+      - 80
+      rgb_color:
+      - 255
+      - 153
+      - 51
+      xy_color:
+      - 0.565
+      - 0.391
+      friendly_name: Office Light
+      supported_features: 32
+      state: 'on'
+    light.shelf_light:
+      min_color_temp_kelvin: 2202
+      max_color_temp_kelvin: 4000
+      min_mireds: 250
+      max_mireds: 454
+      supported_color_modes:
+      - color_temp
+      color_mode: color_temp
+      brightness: 76
+      color_temp_kelvin: 2202
+      color_temp: 454
+      hs_color:
+      - 29.79
+      - 84.553
+      rgb_color:
+      - 255
+      - 146
+      - 39
+      xy_color:
+      - 0.579
+      - 0.388
+      friendly_name: Shelf Light
+      supported_features: 32
+      state: 'on'
+    light.spot_light_1:
+      min_color_temp_kelvin: 2202
+      max_color_temp_kelvin: 4000
+      min_mireds: 250
+      max_mireds: 454
+      supported_color_modes:
+      - color_temp
+      color_mode: color_temp
+      brightness: 76
+      color_temp_kelvin: 2202
+      color_temp: 454
+      hs_color:
+      - 29.79
+      - 84.553
+      rgb_color:
+      - 255
+      - 146
+      - 39
+      xy_color:
+      - 0.579
+      - 0.388
+      friendly_name: Spot Light 1
+      supported_features: 32
+      state: 'on'
+    light.spot_light_2:
+      min_color_temp_kelvin: 2202
+      max_color_temp_kelvin: 4000
+      min_mireds: 250
+      max_mireds: 454
+      supported_color_modes:
+      - color_temp
+      color_mode: color_temp
+      brightness: 76
+      color_temp_kelvin: 2202
+      color_temp: 454
+      hs_color:
+      - 29.79
+      - 84.553
+      rgb_color:
+      - 255
+      - 146
+      - 39
+      xy_color:
+      - 0.579
+      - 0.388
+      friendly_name: Spot Light 2
+      supported_features: 32
+      state: 'on'
+    light.spot_light_3:
+      min_color_temp_kelvin: 2202
+      max_color_temp_kelvin: 4000
+      min_mireds: 250
+      max_mireds: 454
+      supported_color_modes:
+      - color_temp
+      color_mode: color_temp
+      brightness: 76
+      color_temp_kelvin: 2202
+      color_temp: 454
+      hs_color:
+      - 29.79
+      - 84.553
+      rgb_color:
+      - 255
+      - 146
+      - 39
+      xy_color:
+      - 0.579
+      - 0.388
+      friendly_name: Spot Light 3
+      supported_features: 32
+      state: 'on'
+    light.window_light:
+      min_color_temp_kelvin: 2202
+      max_color_temp_kelvin: 4000
+      min_mireds: 250
+      max_mireds: 454
+      supported_color_modes:
+      - color_temp
+      - hs
+      color_mode: hs
+      brightness: 112
+      color_temp_kelvin:
+      color_temp:
+      hs_color:
+      - 29.878
+      - 80
+      rgb_color:
+      - 255
+      - 153
+      - 51
+      xy_color:
+      - 0.565
+      - 0.391
+      friendly_name: Window Light
+      supported_features: 32
+      state: 'on'
+  metadata: {}
+  icon: mdi:weather-sunset-down
+- id: '1746394166766'
+  name: Night with BK
+  entities:
+    light.ceiling_light:
+      min_color_temp_kelvin: 2202
+      max_color_temp_kelvin: 4000
+      min_mireds: 250
+      max_mireds: 454
+      supported_color_modes:
+      - color_temp
+      color_mode:
+      brightness:
+      color_temp_kelvin:
+      color_temp:
+      hs_color:
+      rgb_color:
+      xy_color:
+      friendly_name: ceiling light
+      supported_features: 32
+      state: 'off'
+    light.display_cabinet:
+      supported_color_modes:
+      - brightness
+      color_mode:
+      brightness:
+      friendly_name: Display Cabinet
+      supported_features: 32
+      state: 'off'
+    light.kitchen_light:
+      min_color_temp_kelvin: 2202
+      max_color_temp_kelvin: 4000
+      min_mireds: 250
+      max_mireds: 454
+      supported_color_modes:
+      - color_temp
+      color_mode:
+      brightness:
+      color_temp_kelvin:
+      color_temp:
+      hs_color:
+      rgb_color:
+      xy_color:
+      friendly_name: Kitchen Light
+      supported_features: 32
+      state: 'off'
+    light.night_light:
+      min_color_temp_kelvin: 2202
+      max_color_temp_kelvin: 4000
+      min_mireds: 250
+      max_mireds: 454
+      supported_color_modes:
+      - color_temp
+      color_mode:
+      brightness:
+      color_temp_kelvin:
+      color_temp:
+      hs_color:
+      rgb_color:
+      xy_color:
+      friendly_name: Night Light
+      supported_features: 32
+      state: 'off'
+    light.office_light:
+      min_color_temp_kelvin: 2202
+      max_color_temp_kelvin: 4000
+      min_mireds: 250
+      max_mireds: 454
+      supported_color_modes:
+      - color_temp
+      - hs
+      color_mode: hs
+      brightness: 254
+      color_temp_kelvin:
+      color_temp:
+      hs_color:
+      - 30.834
+      - 61.568
+      rgb_color:
+      - 255
+      - 179
+      - 98
+      xy_color:
+      - 0.503
+      - 0.395
+      friendly_name: Office light
+      supported_features: 32
+      state: 'on'
+    switch.iron:
+      friendly_name: Plant light
+      state: 'off'
+    light.shelf_light:
+      min_color_temp_kelvin: 2202
+      max_color_temp_kelvin: 4000
+      min_mireds: 250
+      max_mireds: 454
+      supported_color_modes:
+      - color_temp
+      color_mode:
+      brightness:
+      color_temp_kelvin:
+      color_temp:
+      hs_color:
+      rgb_color:
+      xy_color:
+      friendly_name: Shelf Light
+      supported_features: 32
+      state: 'off'
+    light.spot_light_1:
+      min_color_temp_kelvin: 2202
+      max_color_temp_kelvin: 4000
+      min_mireds: 250
+      max_mireds: 454
+      supported_color_modes:
+      - color_temp
+      color_mode:
+      brightness:
+      color_temp_kelvin:
+      color_temp:
+      hs_color:
+      rgb_color:
+      xy_color:
+      friendly_name: Spot Light 1
+      supported_features: 32
+      state: 'off'
+    light.spot_light_2:
+      min_color_temp_kelvin: 2202
+      max_color_temp_kelvin: 4000
+      min_mireds: 250
+      max_mireds: 454
+      supported_color_modes:
+      - color_temp
+      color_mode:
+      brightness:
+      color_temp_kelvin:
+      color_temp:
+      hs_color:
+      rgb_color:
+      xy_color:
+      friendly_name: Spot Light 2
+      supported_features: 32
+      state: 'off'
+    light.spot_light_3:
+      min_color_temp_kelvin: 2202
+      max_color_temp_kelvin: 4000
+      min_mireds: 250
+      max_mireds: 454
+      supported_color_modes:
+      - color_temp
+      color_mode:
+      brightness:
+      color_temp_kelvin:
+      color_temp:
+      hs_color:
+      rgb_color:
+      xy_color:
+      friendly_name: Spot Light 3
+      supported_features: 32
+      state: 'off'
+    light.window_light:
+      min_color_temp_kelvin: 2202
+      max_color_temp_kelvin: 4000
+      min_mireds: 250
+      max_mireds: 454
+      supported_color_modes:
+      - color_temp
+      - hs
+      color_mode:
+      brightness:
+      color_temp_kelvin:
+      color_temp:
+      hs_color:
+      rgb_color:
+      xy_color:
+      friendly_name: Window Light
+      supported_features: 32
+      state: 'off'
+  metadata: {}
+  icon: mdi:weather-night
