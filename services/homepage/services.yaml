@@ -113,6 +113,13 @@
                 # siteMonitor: https://obsidian.punsvik.net
                 server: truenas
                 container: obsidian-sync
+        - Supabase:
+                icon: supabase.png
+                href: https://supabase.furuknappen.no
+                description: Postgres backend & auth [TrueNAS]
+                siteMonitor: https://supabase.furuknappen.no
+                server: truenas
+                container: supabase-studio
         - Grafana:
                 icon: grafana.png
                 href: https://grafana.punsvik.net/a/grafana-lokiexplore-app/explore
