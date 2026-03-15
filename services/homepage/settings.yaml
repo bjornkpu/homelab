@@ -30,7 +30,7 @@ layout:
     columns: 5
   Disabled:
     style: row
-    columns: 7
+    columns: 8
     collapsed: true
 
 # Status style for services
