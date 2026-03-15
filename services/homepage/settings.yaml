@@ -19,19 +19,19 @@ favicon: https://raw.githubusercontent.com/gethomepage/homepage/main/public/home
 headerStyle: clean
 
 layout:
-  Most Used:
-    style: row
-    columns: 3
-  Utilities:
-    style: row
-    columns: 3
-  Infrastructure:
+  Home:
     style: row
     columns: 5
-  Disabled:
+  Tools:
     style: row
-    columns: 8
-    collapsed: true
-
-# Status style for services
-# statusStyle: dot
+    columns: 5
+  Infrastructure:
+    style: row
+    columns: 7
+  Backend:
+    style: row
+    columns: 3
+  Inactive Apps:
+    style: row
+    columns: 4
+    initiallyCollapsed: true
