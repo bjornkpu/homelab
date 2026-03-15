@@ -1,0 +1,27 @@
+services:
+  couchdb:
+    image: couchdb:latest
+    container_name: obsidian-sync
+    restart: unless-stopped
+    user: 5984:568
+    ports:
+      - 5984:5984
+    networks:
+      - traefik
+    environment:
+      - COUCHDB_USER=${COUCHDB_USER}
+      - COUCHDB_PASSWORD=${COUCHDB_PASSWORD}
+    volumes:
+      - /mnt/main/appdata/obsidian-sync:/opt/couchdb/data
+      - /mnt/main/homelab/services/obsidian/local.d:/opt/couchdb/etc/local.d
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.obsidian.rule=Host(`obsidian.punsvik.net`)"
+      - "traefik.http.routers.obsidian.entrypoints=websecure"
+      - "traefik.http.routers.obsidian.tls.certresolver=le"
+      - "traefik.http.routers.obsidian.middlewares=security-headers@file"
+      - "traefik.http.services.obsidian.loadbalancer.server.port=5984"
+
+networks:
+  traefik:
+    external: true
