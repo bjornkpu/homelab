@@ -1,4 +1,24 @@
 .env
+laravel.env
 logs/
 .claude/
 CLAUDE.md
+
+# Home Assistant runtime/generated/secrets
+services/home-assistant/SERVICE_ACCOUNT.json
+services/home-assistant/.HA_VERSION
+services/home-assistant/.cloud/
+services/home-assistant/.cache/
+services/home-assistant/.storage/
+services/home-assistant/.ha_run.lock
+services/home-assistant/blueprints/
+services/home-assistant/www/
+services/home-assistant/custom_components/
+services/home-assistant/deps/
+services/home-assistant/tts/
+services/home-assistant/home-assistant.log*
+services/home-assistant/home-assistant_v2.db*
+services/home-assistant/backups/
+services/home-assistant/image/
+services/home-assistant/secrets.yaml
+services/home-assistant/HCQROA~F
