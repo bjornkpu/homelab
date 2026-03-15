@@ -6,23 +6,23 @@
     icon: homepage.png
 
 - greeting:
-    text_size: 2xl
+    text_size: 1xl
     text: Punsvik Homelab
 
-- datetime:
-    text_size: xl
-    format:
-      dateStyle: long
-      timeStyle: short
-      hour12: false
+# - datetime:
+#     text_size: xl
+#     format:
+#       dateStyle: long
+#       timeStyle: short
+#       hour12: false
 
-- openmeteo:
-    label: Trondheim
-    latitude: 63.43
-    longitude: 10.39
-    timezone: Europe/Oslo
-    units: metric
-    cache: 5
+# - openmeteo:
+#     label: Trondheim
+#     latitude: 63.43
+#     longitude: 10.39
+#     timezone: Europe/Oslo
+#     units: metric
+#     cache: 5
 
 # - search:
 #     provider: duckduckgo
@@ -30,7 +30,6 @@
 #     focus: false
 
 - resources:
-    label: TrueNAS
     cpu: true
     memory: true
     cputemp: true
