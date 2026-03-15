@@ -1,0 +1,7 @@
+project_id: punsvikhomeassistant
+service_account: !include SERVICE_ACCOUNT.json
+report_state: true
+exposed_domains:
+  - switch
+  - light
+  - scene
