@@ -2,30 +2,12 @@
 # Homepage Services Configuration
 # Grouped by category with backend info in descriptions
 
-- Home Automation:
+- Most Used:
     - Home Assistant:
         icon: home-assistant.png
         href: https://home.punsvik.net
         description: Smart home control [K8s]
         siteMonitor: https://home.punsvik.net
-
-- Productivity:
-    - Outline:
-        icon: outline.png
-        href: https://outline.punsvik.net
-        description: Team wiki & documentation [TrueNAS]
-        siteMonitor: https://outline.punsvik.net
-        server: truenas
-        container: ix-outline-outline-1
-    - Memos:
-        icon: memos.png
-        href: https://memos.punsvik.net
-        description: Quick notes & memos [TrueNAS]
-        siteMonitor: https://memos.punsvik.net
-        server: truenas
-        container: ix-memos-memos-1
-
-- Food & Recipes:
     - Mealie:
         icon: mealie.png
         href: https://mealie.punsvik.net
@@ -33,36 +15,11 @@
         siteMonitor: https://mealie.punsvik.net
         server: truenas
         container: ix-mealie-mealie-1
-    - KitchenOwl:
-        icon: kitchenowl.png
-        href: https://kitchenowl.punsvik.net
-        description: Grocery & recipe management [TrueNAS]
-        siteMonitor: https://kitchenowl.punsvik.net
-        server: truenas
-        container: ix-kitchenowl-kitchenowl-1
-    - Tandoor:
-        icon: tandoor-recipes.png
-        href: https://tandoor.punsvik.net
-        description: Recipe manager [TrueNAS]
-        siteMonitor: https://tandoor.punsvik.net
-        server: truenas
-        container: ix-tandoor-recipes-recipes-1
     - Shopping List:
         icon: mdi-cart-outline
         href: https://shopping-list.furuknappen.no
         description: Shared shopping lists [K8s]
         siteMonitor: https://shopping-list.furuknappen.no
-
-- Finance:
-    - Actual Budget:
-        icon: actual-budget.png
-        href: https://budget.furuknappen.no
-        description: Personal budgeting [TrueNAS]
-        siteMonitor: https://budget.furuknappen.no
-        server: truenas
-        container: ix-actual-budget-furuknappen-actual-budget-1
-
-- Data & Storage:
     - NocoDB:
         icon: nocodb.png
         href: https://db.furuknappen.no
@@ -103,9 +60,13 @@
         href: https://obsidian.punsvik.net
         description: Obsidian sync backend [K8s]
         siteMonitor: https://obsidian.punsvik.net
-    
-
-- Analytics:
+    - Solidtime:
+        icon: solidtime.png
+        href: https://solidtime.punsvik.net
+        description: Time tracker for freelancers & agencies [TrueNAS]
+        siteMonitor: https://solidtime.punsvik.net
+        server: truenas
+        container: solidtime
     - Umami:
         icon: umami.png
         href: https://analytics.furuknappen.no
@@ -126,6 +87,12 @@
         description: Reverse proxy & load balancer [TrueNAS]
         server: truenas
         container: traefik
+    - WireGuard:
+        icon: wireguard.png
+        href: https://vpn.punsvik.net
+        description: VPN management interface [TrueNAS]
+        siteMonitor: https://vpn.punsvik.net
+        server: truenas
     - Blocky:
         icon: blocky.png
         href: https://dns.punsvik.net
@@ -151,9 +118,56 @@
         server: truenas
         container: ix-dozzle-dozzle-1
 
-- Gaming:
+- Disabled:
+    - Outline:
+        icon: outline.png
+        href: https://outline.punsvik.net
+        description: Team wiki & documentation
+        # siteMonitor: https://outline.punsvik.net
+        server: truenas
+        container: ix-outline-outline-1
+    - Planka:
+        icon: planka.png
+        href: https://planka.punsvik.net
+        description: Kanban board & project management
+        # siteMonitor: https://planka.punsvik.net
+        server: truenas
+        container: ix-planka-planka-1
+    - Donetick:
+        icon: mdi-checkbox-marked-circle-outline
+        href: https://donetick.punsvik.net
+        description: Shared task & chore tracker
+        # siteMonitor: https://donetick.punsvik.net
+        server: truenas
+        container: ix-donetick-donetick-1
+    - Memos:
+        icon: memos.png
+        href: https://memos.punsvik.net
+        description: Quick notes & memos
+        # siteMonitor: https://memos.punsvik.net
+        server: truenas
+        container: ix-memos-memos-1
+    - KitchenOwl:
+        icon: kitchenowl.png
+        href: https://kitchenowl.punsvik.net
+        description: Grocery & recipe management
+        # siteMonitor: https://kitchenowl.punsvik.net
+        server: truenas
+        container: ix-kitchenowl-kitchenowl-1
+    - Tandoor:
+        icon: tandoor-recipes.png
+        href: https://tandoor.punsvik.net
+        description: Recipe manager
+        # siteMonitor: https://tandoor.punsvik.net
+        server: truenas
+        container: ix-tandoor-recipes-recipes-1
     - Minecraft:
         icon: minecraft.png
-        description: Minecraft server [TrueNAS]
+        description: Minecraft server
         server: truenas
         container: ix-minecraft-server-minecraft-1
+    - Actual Budget:
+        icon: actual-budget.png
+        description: Personal budgeting [TrueNAS]
+        server: truenas
+        container: ix-actual-budget-furuknappen-actual-budget-1

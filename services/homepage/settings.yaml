@@ -19,33 +19,19 @@ favicon: https://raw.githubusercontent.com/gethomepage/homepage/main/public/home
 headerStyle: clean
 
 layout:
-  Home Automation:
+  Most Used:
     style: row
-    columns: 1
-  Productivity:
-    style: row
-    columns: 2
-  Food & Recipes:
-    style: row
-    columns: 4
-  Finance:
-    style: row
-    columns: 1
-  Data & Storage:
-    style: row
-    columns: 2
+    columns: 3
   Utilities:
     style: row
     columns: 3
-  Analytics:
-    style: row
-    columns: 1
   Infrastructure:
     style: row
     columns: 5
-  Gaming:
+  Disabled:
     style: row
-    columns: 1
+    columns: 7
+    collapsed: true
 
 # Status style for services
-statusStyle: dot
+# statusStyle: dot
