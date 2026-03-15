@@ -1,0 +1,22 @@
+# Traefik Dynamic Configuration - WireGuard (TrueNAS App)
+# Proxies vpn.punsvik.net to TrueNAS app on port 30058
+
+http:
+  routers:
+    wgeasy:
+      rule: "Host(`vpn.punsvik.net`)"
+      entryPoints:
+        - websecure
+      service: wgeasy-svc
+      tls:
+        certResolver: le
+      middlewares:
+        - security-headers@file
+        - internal-only@file
+
+  services:
+    wgeasy-svc:
+      loadBalancer:
+        passHostHeader: true
+        servers:
+          - url: "http://192.168.1.4:30058"
