@@ -1,0 +1,55 @@
+services:
+  loki:
+    image: grafana/loki:latest
+    container_name: loki
+    restart: unless-stopped
+    volumes:
+      - ./loki-config.yaml:/etc/loki/local-config.yaml:ro
+      - /mnt/main/appdata/observability/loki:/loki
+    networks:
+      - observability
+
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana
+    restart: unless-stopped
+    environment:
+      - GF_SECURITY_ADMIN_EMAIL=${GRAFANA_EMAIL}
+      - GF_SECURITY_ADMIN_PASSWORD=${GRAFANA_PASSWORD}
+      - GF_AUTH_ANONYMOUS_ENABLED=false
+    volumes:
+      - /mnt/main/appdata/observability/grafana:/var/lib/grafana
+      - ./grafana/provisioning:/etc/grafana/provisioning:ro
+    depends_on:
+      - loki
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.grafana.rule=Host(`grafana.punsvik.net`)"
+      - "traefik.http.routers.grafana.entrypoints=websecure"
+      - "traefik.http.routers.grafana.tls.certresolver=le"
+      - "traefik.http.routers.grafana.middlewares=internal-only@file,security-headers@file"
+      - "traefik.http.services.grafana-svc.loadbalancer.server.port=3000"
+    networks:
+      - observability
+      - traefik
+
+  alloy:
+    image: grafana/alloy:latest
+    container_name: alloy
+    restart: unless-stopped
+    user: "0:0"
+    command:
+      - run
+      - /etc/alloy/config.alloy
+      - --server.http.listen-addr=0.0.0.0:12345
+    volumes:
+      - ./alloy-config.alloy:/etc/alloy/config.alloy:ro
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - observability
+
+networks:
+  observability:
+    driver: bridge
+  traefik:
+    external: true

@@ -1,10 +1,10 @@
 http:
   routers:
-    logs:
-      rule: "Host(`logs.punsvik.net`)"
+    dozzle:
+      rule: "Host(`dozzle.punsvik.net`)"
       entryPoints:
         - websecure
-      service: logs-svc
+      service: dozzle-svc
       tls:
         certResolver: le
       middlewares:
@@ -12,7 +12,7 @@ http:
         - security-headers@file
 
   services:
-    logs-svc:
+    dozzle-svc:
       loadBalancer:
         passHostHeader: true
         servers:

@@ -1,0 +1,60 @@
+receivers:
+  filelog:
+    include:
+      - /var/lib/docker/containers/*/*.log
+    include_file_path: true
+    start_at: beginning
+    operators:
+      # Parse Docker JSON envelope: {"log":"...","stream":"stdout","time":"..."}
+      - type: json_parser
+        parse_from: body
+        parse_to: attributes
+      # Parse timestamp separately — RFC3339Nano with timezone offset
+      - type: time_parser
+        parse_from: attributes.time
+        layout_type: gotime
+        layout: "2006-01-02T15:04:05.999999999Z07:00"
+      # Promote the actual log message to body
+      - type: move
+        from: attributes.log
+        to: body
+      # Keep stdout/stderr as an attribute
+      - type: move
+        from: attributes.stream
+        to: attributes["log.iostream"]
+      # Extract container ID from the file path
+      - type: regex_parser
+        regex: '/var/lib/docker/containers/(?P<container_id>[a-f0-9]{64})/'
+        parse_from: attributes["log.file.path"]
+      - type: move
+        from: attributes.container_id
+        to: resource["container.id"]
+
+processors:
+  transform:
+    log_statements:
+      - context: resource
+        statements:
+          # Use first 12 chars of container ID as service name (Docker short-ID convention)
+          - set(attributes["service.name"], Substring(attributes["container.id"], 0, 12))
+  batch:
+    timeout: 5s
+    send_batch_size: 1000
+  resource:
+    attributes:
+      - key: host.name
+        value: truenas
+        action: upsert
+
+exporters:
+  otlphttp:
+    endpoint: http://loki:3100/otlp
+    tls:
+      insecure: true
+
+service:
+  pipelines:
+    logs:
+      receivers: [filelog]
+      processors: [transform, batch, resource]
+      exporters: [otlphttp]
