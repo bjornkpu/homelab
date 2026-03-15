@@ -1,5 +1,5 @@
 # Traefik Dynamic Configuration - Shopping List (K8s Frontend)
-# Proxies shopping-list.furuknappen.no to K8s ingress at 192.168.1.20:443
+# Proxies shopping-list.furuknappen.no to K8s ingress at 192.168.1.20:80
 
 http:
   routers:
@@ -13,14 +13,26 @@ http:
       middlewares:
         - security-headers@file
 
+    shopping-list-db:
+      rule: "Host(`db.shopping-list.furuknappen.no`)"
+      entryPoints:
+        - websecure
+      service: shopping-list-db-svc
+      tls:
+        certResolver: le
+      middlewares:
+        - security-headers@file
+
   services:
     shopping-list-svc:
       loadBalancer:
         passHostHeader: true
-        serversTransport: shopping-list-sni
         servers:
-          - url: "https://192.168.1.20:443"
+          - url: "http://192.168.1.20:80"
+    shopping-list-db-svc:
+      loadBalancer:
+        passHostHeader: true
+        servers:
+          - url: "http://192.168.1.20:80"
 
-  serversTransports:
-    shopping-list-sni:
-      serverName: shopping-list.furuknappen.no
+
