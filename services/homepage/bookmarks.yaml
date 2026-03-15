@@ -2,3 +2,28 @@
 # Homepage Bookmarks
 # https://gethomepage.dev/configs/bookmarks
 
+- Inactive Apps:
+    - Outline:
+        - icon: outline.png
+          href: https://outline.punsvik.net
+          description: Team wiki & documentation
+    - Planka:
+        - icon: planka.png
+          href: https://planka.punsvik.net
+          description: Kanban board & project management
+    - Donetick:
+        - icon: mdi-checkbox-marked-circle-outline
+          href: https://donetick.punsvik.net
+          description: Shared task & chore tracker
+    - Memos:
+        - icon: memos.png
+          href: https://memos.punsvik.net
+          description: Quick notes & memos
+    - KitchenOwl:
+        - icon: kitchenowl.png
+          href: https://kitchenowl.punsvik.net
+          description: Grocery & recipe management
+    - Tandoor:
+        - icon: tandoor-recipes.png
+          href: https://tandoor.punsvik.net
+          description: Recipe manager
