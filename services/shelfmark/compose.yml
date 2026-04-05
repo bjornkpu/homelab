@@ -1,0 +1,27 @@
+# Shelfmark - Book & audiobook search/download
+# https://github.com/calibrain/shelfmark
+#
+# Routes ALL traffic through gluetun VPN.
+# Start gluetun first.
+#
+# First-run:
+#   1. Copy .env.example → .env, configure as needed
+#   2. Ensure gluetun is running
+#   3. docker compose up -d
+
+services:
+  shelfmark:
+    image: ghcr.io/calibrain/shelfmark:latest
+    container_name: shelfmark
+    restart: unless-stopped
+    network_mode: "container:gluetun"
+    environment:
+      - FLASK_PORT=8084
+      - DOCKERMODE=true
+      - PUID=568
+      - PGID=568
+      - SEARCH_MODE=universal
+      - AUTH_METHOD=none
+    volumes:
+      - /mnt/main/appdata/shelfmark:/config
+      - /mnt/main/appdata/grimmory/bookdrop:/books

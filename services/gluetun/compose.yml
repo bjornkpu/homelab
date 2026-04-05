@@ -1,0 +1,38 @@
+# Gluetun - VPN gateway for services that need tunnel routing
+# https://github.com/qdm12/gluetun
+#
+# First-run:
+#   1. Copy .env.example → .env, fill in PIA credentials
+#   2. docker compose up -d
+
+services:
+  gluetun:
+    image: qmcgaw/gluetun:latest
+    container_name: gluetun
+    restart: unless-stopped
+    cap_add:
+      - NET_ADMIN
+    devices:
+      - /dev/net/tun:/dev/net/tun
+    environment:
+      - VPN_SERVICE_PROVIDER=private internet access
+      - VPN_TYPE=openvpn
+      - OPENVPN_USER=${PIA_USER}
+      - OPENVPN_PASSWORD=${PIA_PASSWORD}
+      - SERVER_REGIONS=${PIA_REGION:-Netherlands}
+      - FIREWALL_VPN_INPUT_PORTS=${VPN_FORWARDED_PORT:-}
+    ports:
+      # Shelfmark web UI
+      - "8084:8084"
+    networks:
+      - traefik
+    healthcheck:
+      test: ["CMD", "wget", "-qO", "/dev/null", "http://localhost:9999"]
+      interval: 30s
+      retries: 3
+      timeout: 5s
+
+networks:
+  traefik:
+    external: true
+    name: traefik

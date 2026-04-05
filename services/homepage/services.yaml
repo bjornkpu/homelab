@@ -33,6 +33,27 @@
         siteMonitor: https://mealie.punsvik.net
         server: truenas
         container: ix-mealie-mealie-1
+    - Grimmory:
+        icon: booklore.svg
+        href: https://grimmory.punsvik.net
+        description: Self-hosted book collection manager
+        siteMonitor: https://grimmory.punsvik.net
+        server: truenas
+        container: ix-grimmory-grimmory-1
+    - Shelfmark:
+        icon: mdi-bookshelf
+        href: https://shelfmark.punsvik.net
+        description: Book downloader
+        siteMonitor: https://shelfmark.punsvik.net
+        server: truenas
+        container: shelfmark
+    - Paperless-ngx:
+        icon: paperless-ngx.png
+        href: https://paperless.punsvik.net
+        description: Document management
+        siteMonitor: https://paperless.punsvik.net
+        server: truenas
+        container: ix-paperless-ngx-paperless-1
 
 - Tools:
     - Supabase:

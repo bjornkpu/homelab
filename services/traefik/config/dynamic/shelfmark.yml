@@ -1,0 +1,18 @@
+http:
+  routers:
+    shelfmark:
+      rule: "Host(`shelfmark.punsvik.net`)"
+      entryPoints:
+        - websecure
+      service: shelfmark-svc
+      tls:
+        certResolver: le
+      middlewares:
+        - internal-only@file
+        - security-headers@file
+
+  services:
+    shelfmark-svc:
+      loadBalancer:
+        servers:
+          - url: "http://gluetun:8084"

@@ -1,0 +1,21 @@
+# Traefik Dynamic Configuration - Grimmory (TrueNAS App)
+# Proxies grimmory.punsvik.net to grimmory on port 30396
+
+http:
+  routers:
+    grimmory:
+      rule: "Host(`grimmory.punsvik.net`)"
+      entryPoints:
+        - websecure
+      service: grimmory-svc
+      tls:
+        certResolver: le
+      middlewares:
+        - security-headers@file
+
+  services:
+    grimmory-svc:
+      loadBalancer:
+        passHostHeader: true
+        servers:
+          - url: "http://grimmory:30396"
