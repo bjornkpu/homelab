@@ -3,6 +3,7 @@ laravel.env
 logs/
 .claude/
 CLAUDE.md
+docs/superpowers/
 
 # Home Assistant runtime/generated/secrets
 services/home-assistant/SERVICE_ACCOUNT.json

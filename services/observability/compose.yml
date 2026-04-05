@@ -3,6 +3,10 @@ services:
     image: grafana/loki:latest
     container_name: loki
     restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          memory: 256M
     volumes:
       - ./loki-config.yaml:/etc/loki/local-config.yaml:ro
       - /mnt/main/appdata/observability/loki:/loki
@@ -13,6 +17,10 @@ services:
     image: grafana/grafana:latest
     container_name: grafana
     restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          memory: 192M
     environment:
       - GF_SECURITY_ADMIN_EMAIL=${GRAFANA_EMAIL}
       - GF_SECURITY_ADMIN_PASSWORD=${GRAFANA_PASSWORD}
@@ -33,18 +41,13 @@ services:
       - observability
       - traefik
 
-  alloy:
-    image: grafana/alloy:latest
-    container_name: alloy
+  vector:
+    image: timberio/vector:0.43.1-debian
+    container_name: vector
     restart: unless-stopped
-    user: "0:0"
-    command:
-      - run
-      - /etc/alloy/config.alloy
-      - --server.http.listen-addr=0.0.0.0:12345
     volumes:
-      - ./alloy-config.alloy:/etc/alloy/config.alloy:ro
-      - /var/run/docker.sock:/var/run/docker.sock
+      - ./vector.yaml:/etc/vector/vector.yaml:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro
     networks:
       - observability
 

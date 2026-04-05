@@ -1,0 +1,29 @@
+sources:
+  docker_logs:
+    type: docker_logs
+    exclude_containers:
+      - vector
+
+transforms:
+  parse:
+    type: remap
+    inputs:
+      - docker_logs
+    source: |
+      .container_name = replace(string(.container_name) ?? "", r'^/', "")
+      .compose_service = string(.label."com.docker.compose.service") ?? ""
+      .image = string(.image) ?? ""
+
+sinks:
+  loki:
+    type: loki
+    inputs:
+      - parse
+    endpoint: http://loki:3100
+    encoding:
+      codec: text
+    labels:
+      container_name: "{{ container_name }}"
+      compose_service: "{{ compose_service }}"
+      image: "{{ image }}"
+    remove_label_fields: true
