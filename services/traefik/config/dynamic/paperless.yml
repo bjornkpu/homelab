@@ -1,0 +1,21 @@
+# Traefik Dynamic Configuration - Paperless-ngx (TrueNAS App)
+# Proxies paperless.punsvik.net to container on port 30070
+
+http:
+  routers:
+    paperless:
+      rule: "Host(`paperless.punsvik.net`)"
+      entryPoints:
+        - websecure
+      service: paperless-svc
+      tls:
+        certResolver: le
+      middlewares:
+        - security-headers@file
+
+  services:
+    paperless-svc:
+      loadBalancer:
+        passHostHeader: true
+        servers:
+          - url: "http://ix-paperless-ngx-paperless-1:30070"
