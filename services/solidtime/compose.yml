@@ -27,6 +27,7 @@ services:
     environment:
       CONTAINER_MODE: http
       AUTO_DB_MIGRATE: "true"
+      CADDY_SERVER_WORKER_COUNT: "2"
     healthcheck:
       test: ["CMD", "curl", "--fail", "http://localhost:8000/health-check/up"]
       interval: 30s
