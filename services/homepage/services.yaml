@@ -47,6 +47,13 @@
         siteMonitor: https://shelfmark.punsvik.net
         server: truenas
         container: shelfmark
+    - Immich:
+        icon: immich.png
+        href: https://immich.punsvik.net
+        description: Photo & video management
+        siteMonitor: https://immich.punsvik.net
+        server: truenas
+        container: ix-immich-server-1
     - Paperless-ngx:
         icon: paperless-ngx.png
         href: https://paperless.punsvik.net
@@ -153,3 +160,10 @@
         description: Obsidian sync backend (CouchDB)
         server: truenas
         container: obsidian-sync
+    - Syncthing:
+        icon: syncthing.png
+        href: https://syncthing.punsvik.net
+        description: File sync
+        siteMonitor: https://syncthing.punsvik.net
+        server: truenas
+        container: ix-syncthing-syncthing-1
