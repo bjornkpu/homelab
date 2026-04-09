@@ -1,0 +1,22 @@
+# Traefik Dynamic Configuration - Syncthing (TrueNAS App)
+# Proxies syncthing.punsvik.net to container on port 20910
+
+http:
+  routers:
+    syncthing:
+      rule: "Host(`syncthing.punsvik.net`)"
+      entryPoints:
+        - websecure
+      service: syncthing-svc
+      tls:
+        certResolver: le
+      middlewares:
+        - security-headers@file
+        - internal-only@file
+
+  services:
+    syncthing-svc:
+      loadBalancer:
+        passHostHeader: true
+        servers:
+          - url: "http://ix-syncthing-syncthing-1:20910"
