@@ -1,0 +1,26 @@
+# deploy-webhook - Auto-deploy TrueNAS apps via GitHub Actions webhook
+# https://github.com/adnanh/webhook
+#
+# First-run:
+#   1. Copy .env.example → .env, fill in secrets
+#   2. docker compose up -d --build
+
+services:
+  webhook:
+    build: .
+    container_name: deploy-webhook
+    restart: unless-stopped
+    environment:
+      - DEPLOY_SECRET=${DEPLOY_SECRET}
+      - TRUENAS_API_KEY=${TRUENAS_API_KEY}
+      - ALLOWED_APPS=${ALLOWED_APPS:-pottery-log}
+    volumes:
+      - ./hooks.json:/etc/webhook/hooks.json:ro
+      - ./deploy.sh:/scripts/deploy.sh:ro
+    network_mode: host
+    command: ["-hooks", "/etc/webhook/hooks.json", "-template", "-verbose"]
+    healthcheck:
+      test: ["CMD", "curl", "-sf", "http://localhost:9000"]
+      interval: 30s
+      retries: 3
+      timeout: 5s
