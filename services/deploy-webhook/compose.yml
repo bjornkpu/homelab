@@ -7,7 +7,7 @@
 
 services:
   webhook:
-    image: almir/webhook:2.8.3
+    build: .
     container_name: deploy-webhook
     restart: unless-stopped
     env_file: .env
@@ -27,11 +27,14 @@ services:
       - "traefik.http.middlewares.webhook-rate-limit.ratelimit.average=10"
       - "traefik.http.middlewares.webhook-rate-limit.ratelimit.burst=3"
       - "traefik.http.middlewares.webhook-rate-limit.ratelimit.period=1m"
-    entrypoint: ["/bin/sh", "-c", "apk add -q --no-cache curl && exec webhook -hooks /etc/webhook/hooks.json -template -verbose"]
+    command: ["-hooks", "/etc/webhook/hooks.json", "-template", "-verbose"]
+    read_only: true
     tmpfs:
       - /tmp
     security_opt:
       - no-new-privileges:true
+    cap_drop:
+      - ALL
     healthcheck:
       test: ["CMD", "wget", "-q", "--spider", "http://localhost:9000"]
       interval: 30s
