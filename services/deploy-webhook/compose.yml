@@ -28,10 +28,8 @@ services:
       - "traefik.http.middlewares.webhook-rate-limit.ratelimit.burst=3"
       - "traefik.http.middlewares.webhook-rate-limit.ratelimit.period=1m"
     entrypoint: ["/bin/sh", "-c", "apk add -q --no-cache curl && exec webhook -hooks /etc/webhook/hooks.json -template -verbose"]
-    read_only: true
     tmpfs:
       - /tmp
-      - /var/cache/apk
     security_opt:
       - no-new-privileges:true
     cap_drop:
