@@ -3,16 +3,15 @@
 #
 # First-run:
 #   1. Copy .env.example → .env, fill in secrets
-#   2. docker compose up -d --build
+#   2. docker compose up -d
 
 services:
   webhook:
-    build: .
+    image: almir/webhook:2.8.3
     container_name: deploy-webhook
     restart: unless-stopped
+    env_file: .env
     environment:
-      - DEPLOY_SECRET=${DEPLOY_SECRET}
-      - TRUENAS_API_KEY=${TRUENAS_API_KEY}
       - ALLOWED_APPS=${ALLOWED_APPS:-pottery-log}
     volumes:
       - ./hooks.json:/etc/webhook/hooks.json:ro
@@ -28,16 +27,17 @@ services:
       - "traefik.http.middlewares.webhook-rate-limit.ratelimit.average=10"
       - "traefik.http.middlewares.webhook-rate-limit.ratelimit.burst=3"
       - "traefik.http.middlewares.webhook-rate-limit.ratelimit.period=1m"
-    command: ["-hooks", "/etc/webhook/hooks.json", "-template", "-verbose"]
+    entrypoint: ["/bin/sh", "-c", "apk add -q --no-cache curl && exec webhook -hooks /etc/webhook/hooks.json -template -verbose"]
     read_only: true
     tmpfs:
       - /tmp
+      - /var/cache/apk
     security_opt:
       - no-new-privileges:true
     cap_drop:
       - ALL
     healthcheck:
-      test: ["CMD", "curl", "-so", "/dev/null", "http://localhost:9000"]
+      test: ["CMD", "wget", "-q", "--spider", "http://localhost:9000"]
       interval: 30s
       retries: 3
       timeout: 5s
