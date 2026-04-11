@@ -17,7 +17,13 @@ services:
     volumes:
       - ./hooks.json:/etc/webhook/hooks.json:ro
       - ./deploy.sh:/scripts/deploy.sh:ro
-    network_mode: host
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.deploy-webhook.rule=Host(`deploy.punsvik.net`)"
+      - "traefik.http.routers.deploy-webhook.entrypoints=websecure"
+      - "traefik.http.routers.deploy-webhook.tls.certresolver=le"
+      - "traefik.http.routers.deploy-webhook.middlewares=security-headers@file,rate-limit@file"
+      - "traefik.http.services.deploy-webhook.loadbalancer.server.port=9000"
     command: ["-hooks", "/etc/webhook/hooks.json", "-template", "-verbose"]
     healthcheck:
       test: ["CMD", "curl", "-so", "/dev/null", "http://localhost:9000"]
@@ -25,3 +31,10 @@ services:
       retries: 3
       timeout: 5s
       start_period: 10s
+    networks:
+      - traefik
+
+networks:
+  traefik:
+    external: true
+    name: traefik
