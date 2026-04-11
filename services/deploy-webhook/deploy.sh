@@ -11,12 +11,11 @@ echo "${ALLOWED_APPS}" | tr ',' '\n' | grep -qx "${APP_NAME}" || {
   exit 1
 }
 
-# Call TrueNAS API to update the app (pulls latest image + restarts)
-# NOTE: Endpoint/payload needs verification on live system.
-#       Confirmed working via CLI: midclt call -job app.update "\"appname\""
-PAYLOAD=$(printf '["%s", {}]' "${APP_NAME}")
-curl -sf --max-time 30 -X POST \
-  "http://192.168.1.4/api/v2.0/app/update" \
+# Call TrueNAS API to redeploy the app (pulls latest image + restarts)
+# Equivalent to: midclt call app.redeploy "\"appname\""
+PAYLOAD=$(printf '"%s"' "${APP_NAME}")
+curl -sfk --max-time 30 -X POST \
+  "https://192.168.1.4:444/api/v2.0/app/redeploy" \
   -H "Authorization: Bearer ${TRUENAS_API_KEY}" \
   -H "Content-Type: application/json" \
   -d "${PAYLOAD}"
