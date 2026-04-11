@@ -61,6 +61,13 @@
         siteMonitor: https://paperless.punsvik.net
         server: truenas
         container: ix-paperless-ngx-paperless-1
+    - Pottery Log:
+        icon: mdi-pot-outline
+        href: https://pottery.furuknappen.no
+        description: Pottery project log
+        siteMonitor: https://pottery.furuknappen.no
+        server: truenas
+        container: pottery-log
 
 - Tools:
     - Supabase:
