@@ -22,9 +22,20 @@ services:
       - "traefik.http.routers.deploy-webhook.rule=Host(`deploy.punsvik.net`)"
       - "traefik.http.routers.deploy-webhook.entrypoints=websecure"
       - "traefik.http.routers.deploy-webhook.tls.certresolver=le"
-      - "traefik.http.routers.deploy-webhook.middlewares=security-headers@file,rate-limit@file"
+      - "traefik.http.routers.deploy-webhook.middlewares=security-headers@file,webhook-rate-limit@docker"
       - "traefik.http.services.deploy-webhook.loadbalancer.server.port=9000"
+      # Dedicated rate limit: 10 req/min, burst 3 (endpoint sees ~5 calls/day)
+      - "traefik.http.middlewares.webhook-rate-limit.ratelimit.average=10"
+      - "traefik.http.middlewares.webhook-rate-limit.ratelimit.burst=3"
+      - "traefik.http.middlewares.webhook-rate-limit.ratelimit.period=1m"
     command: ["-hooks", "/etc/webhook/hooks.json", "-template", "-verbose"]
+    read_only: true
+    tmpfs:
+      - /tmp
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
     healthcheck:
       test: ["CMD", "curl", "-so", "/dev/null", "http://localhost:9000"]
       interval: 30s

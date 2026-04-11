@@ -1,2 +1,2 @@
-FROM almir/webhook
+FROM almir/webhook:2.8.3
 RUN apk add --no-cache curl
