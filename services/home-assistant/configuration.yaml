@@ -10,3 +10,5 @@ recorder:
   db_url: postgresql://home-assistant:***REMOVED***@postgres:5432/home-assistant?sslmode=disable
 google_assistant: !include google_assistant.yaml
 http: !include http.yaml
+homeassistant:
+  packages: !include_dir_named packages

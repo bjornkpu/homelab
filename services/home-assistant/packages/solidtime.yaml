@@ -1,0 +1,76 @@
+rest_command:
+  solidtime_start:
+    url: "{{base_url}}/organizations/{{org_id}}/time-entries"
+    method: POST
+    headers:
+      authorization: "Bearer {{token}}"
+      content-type: "application/json"
+      accept: "application/json"
+    payload: >-
+      {"member_id":"{{member_id}}","project_id":"{{project_id}}",
+       "start":"{{utcnow().strftime('%Y-%m-%dT%H:%M:%SZ')}}",
+       "billable":true}
+
+  solidtime_get_running:
+    url: "{{base_url}}/organizations/{{org_id}}/time-entries?active=true"
+    method: GET
+    headers:
+      authorization: "Bearer {{token}}"
+      accept: "application/json"
+
+  solidtime_end_entry:
+    url: "{{base_url}}/organizations/{{org_id}}/time-entries/{{entry_id}}"
+    method: PUT
+    headers:
+      authorization: "Bearer {{token}}"
+      content-type: "application/json"
+      accept: "application/json"
+    payload: "{\"end\":\"{{end_time}}\"}"
+
+script:
+  solidtime_start_mimir:
+    alias: "Solid Time: Start Mimir"
+    sequence:
+      - service: rest_command.solidtime_start
+        data:
+          base_url: !secret solidtime_base_url
+          org_id: !secret solidtime_org_id
+          member_id: !secret solidtime_member_id
+          token: !secret solidtime_token
+          project_id: !secret solidtime_project_mimir
+        response_variable: result
+      - choose:
+          - conditions: "{{ result.status not in [200, 201] }}"
+            sequence:
+              - service: notify.mobile_app_sm_s931b
+                data:
+                  title: "Solid Time: start failed"
+                  message: "HTTP {{ result.status }}: {{ result.content }}"
+
+  solidtime_stop:
+    alias: "Solid Time: Stop"
+    sequence:
+      - service: rest_command.solidtime_get_running
+        data:
+          base_url: !secret solidtime_base_url
+          org_id: !secret solidtime_org_id
+          member_id: !secret solidtime_member_id
+          token: !secret solidtime_token
+        response_variable: running
+      - variables:
+          entries: "{{ running.content.data }}"
+      - choose:
+          - conditions: "{{entries | count > 0}}"
+            sequence:
+              - service: rest_command.solidtime_end_entry
+                data:
+                  base_url: !secret solidtime_base_url
+                  org_id: !secret solidtime_org_id
+                  token: !secret solidtime_token
+                  entry_id: "{{entries[0].id}}"
+                  end_time: "{{utcnow().strftime('%Y-%m-%dT%H:%M:%SZ')}}"
+        default:
+          - service: notify.mobile_app_sm_s931b
+            data:
+              title: "Solid Time"
+              message: "No running timer to stop."
