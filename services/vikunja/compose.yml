@@ -1,0 +1,69 @@
+# Vikunja - Open-source task manager
+# https://vikunja.io/docs/full-docker-example/
+#
+# Search backend: ParadeDB is a drop-in Postgres replacement; Vikunja auto-detects
+# it and enables enhanced search — no extra config needed.
+#
+# Vikunja runs as UID 1000 (no group). The files dataset is chowned to 1000:568.
+
+services:
+  vikunja:
+    image: vikunja/vikunja:${VIKUNJA_IMAGE_TAG:-2.3}
+    container_name: vikunja
+    restart: unless-stopped
+    depends_on:
+      vikunja-db:
+        condition: service_healthy
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.vikunja.rule=Host(`tasks.punsvik.net`)"
+      - "traefik.http.routers.vikunja.entrypoints=websecure"
+      - "traefik.http.routers.vikunja.tls.certresolver=le"
+      - "traefik.http.routers.vikunja.middlewares=security-headers@file"
+      - "traefik.http.services.vikunja.loadbalancer.server.port=3456"
+    environment:
+      VIKUNJA_SERVICE_PUBLICURL: ${VIKUNJA_PUBLICURL}
+      VIKUNJA_SERVICE_SECRET: ${VIKUNJA_SERVICE_SECRET}
+      VIKUNJA_DATABASE_TYPE: postgres
+      VIKUNJA_DATABASE_HOST: vikunja-db
+      VIKUNJA_DATABASE_DATABASE: ${DB_DATABASE}
+      VIKUNJA_DATABASE_USER: ${DB_USERNAME}
+      VIKUNJA_DATABASE_PASSWORD: ${DB_PASSWORD}
+      VIKUNJA_SERVICE_ENABLEREGISTRATION: "false"
+      VIKUNJA_AUTH_OPENID_ENABLED: ${OIDC_ENABLED:-false}
+      VIKUNJA_AUTH_OPENID_PROVIDERS_POCKETID_NAME: Pocket ID
+      VIKUNJA_AUTH_OPENID_PROVIDERS_POCKETID_AUTHURL: https://auth.punsvik.net
+      VIKUNJA_AUTH_OPENID_PROVIDERS_POCKETID_CLIENTID: ${OIDC_CLIENT_ID}
+      VIKUNJA_AUTH_OPENID_PROVIDERS_POCKETID_CLIENTSECRET: ${OIDC_CLIENT_SECRET}
+      VIKUNJA_AUTH_OPENID_PROVIDERS_POCKETID_SCOPE: "openid profile email"
+    volumes:
+      - /mnt/main/appdata/vikunja/files:/app/vikunja/files
+    networks:
+      - traefik
+      - vikunja-internal
+
+  vikunja-db:
+    image: paradedb/paradedb:${PARADEDB_IMAGE_TAG:-0.23.4-pg18}
+    container_name: vikunja-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${DB_DATABASE}
+      POSTGRES_USER: ${DB_USERNAME}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - /mnt/main/appdata/vikunja/db:/var/lib/postgresql
+    networks:
+      - vikunja-internal
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -h localhost -U $$POSTGRES_USER"]
+      interval: 10s
+      retries: 5
+      timeout: 5s
+      start_period: 30s
+
+networks:
+  traefik:
+    external: true
+    name: traefik
+  vikunja-internal:
+    driver: bridge

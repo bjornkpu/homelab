@@ -14,6 +14,13 @@
         siteMonitor: https://solidtime.punsvik.net
         server: truenas
         container: solidtime
+    - Vikunja:
+        icon: vikunja.png
+        href: https://tasks.punsvik.net
+        description: Task manager
+        siteMonitor: https://tasks.punsvik.net
+        server: truenas
+        container: vikunja
     - Shopping List:
         icon: mdi-cart-outline
         href: https://shopping-list.furuknappen.no
