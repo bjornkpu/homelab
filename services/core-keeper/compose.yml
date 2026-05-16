@@ -1,0 +1,19 @@
+services:
+  core-keeper:
+    image: escaping/core-keeper-dedicated:latest
+    container_name: core-keeper
+    restart: unless-stopped
+    stop_grace_period: 2m
+    env_file:
+      - path: .env
+    environment:
+      WORLD_NAME: "Furuvik"
+      MAX_PLAYERS: "3"
+      SERVER_PORT: "27015"
+      PUID: "1000"
+      PGID: "1000"
+    ports:
+      - "27015:27015/udp"
+    volumes:
+      - /mnt/main/appdata/core-keeper/data:/home/steam/core-keeper-data
+      - /mnt/main/appdata/core-keeper/server:/home/steam/core-keeper-dedicated
