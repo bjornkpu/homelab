@@ -2,7 +2,6 @@
 laravel.env
 logs/
 .claude/
-CLAUDE.md
 docs/superpowers/
 
 # Home Assistant runtime/generated/secrets
