@@ -2,182 +2,189 @@
 # Homepage Services Configuration
 
 - Home:
-    - Home Assistant:
-        icon: home-assistant.png
-        href: https://home.punsvik.net
-        description: Smart home control
-        siteMonitor: https://home.punsvik.net
-    - Solidtime:
-        icon: solidtime.png
-        href: https://solidtime.punsvik.net
-        description: Time tracker
-        siteMonitor: https://solidtime.punsvik.net
-        server: truenas
-        container: solidtime
-    - Vikunja:
-        icon: vikunja.png
-        href: https://tasks.punsvik.net
-        description: Task manager
-        siteMonitor: https://tasks.punsvik.net
-        server: truenas
-        container: vikunja
-    - Shopping List:
-        icon: mdi-cart-outline
-        href: https://shopping-list.furuknappen.no
-        description: Shared shopping lists [K8s]
-        siteMonitor: https://shopping-list.furuknappen.no
-    - NocoDB:
-        icon: nocodb.png
-        href: https://db.furuknappen.no
-        description: Airtable alternative database
-        siteMonitor: https://db.furuknappen.no
-        server: truenas
-        container: ix-nocodb-nocodb-1
-    - Mealie:
-        icon: mealie.png
-        href: https://mealie.punsvik.net
-        description: Recipe manager & meal planner
-        siteMonitor: https://mealie.punsvik.net
-        server: truenas
-        container: ix-mealie-mealie-1
-    - Grimmory:
-        icon: booklore.svg
-        href: https://grimmory.punsvik.net
-        description: Self-hosted book collection manager
-        siteMonitor: https://grimmory.punsvik.net
-        server: truenas
-        container: ix-grimmory-grimmory-1
-    - Shelfmark:
-        icon: mdi-bookshelf
-        href: https://shelfmark.punsvik.net
-        description: Book downloader
-        siteMonitor: https://shelfmark.punsvik.net
-        server: truenas
-        container: shelfmark
-    - Immich:
-        icon: immich.png
-        href: https://immich.punsvik.net
-        description: Photo & video management
-        siteMonitor: https://immich.punsvik.net
-        server: truenas
-        container: ix-immich-server-1
-    - Paperless-ngx:
-        icon: paperless-ngx.png
-        href: https://paperless.punsvik.net
-        description: Document management
-        siteMonitor: https://paperless.punsvik.net
-        server: truenas
-        container: ix-paperless-ngx-paperless-1
-    - Pottery Log:
-        icon: mdi-pot-outline
-        href: https://pottery.furuknappen.no
-        description: Pottery project log
-        siteMonitor: https://pottery.furuknappen.no
-        server: truenas
-        container: pottery-log
+      - Home Assistant:
+            icon: home-assistant.png
+            href: https://home.punsvik.net
+            description: Smart home control
+            siteMonitor: https://home.punsvik.net
+      - Solidtime:
+            icon: solidtime.png
+            href: https://solidtime.punsvik.net
+            description: Time tracker
+            siteMonitor: https://solidtime.punsvik.net
+            server: truenas
+            container: solidtime
+      - Vikunja:
+            icon: vikunja.png
+            href: https://tasks.punsvik.net
+            description: Task manager
+            siteMonitor: https://tasks.punsvik.net
+            server: truenas
+            container: vikunja
+      - Shopping List:
+            icon: mdi-cart-outline
+            href: https://shopping-list.furuknappen.no
+            description: Shared shopping lists [K8s]
+            siteMonitor: https://shopping-list.furuknappen.no
+      - NocoDB:
+            icon: nocodb.png
+            href: https://db.furuknappen.no
+            description: Airtable alternative database
+            siteMonitor: https://db.furuknappen.no
+            server: truenas
+            container: ix-nocodb-nocodb-1
+      - Mealie:
+            icon: mealie.png
+            href: https://mealie.punsvik.net
+            description: Recipe manager & meal planner
+            siteMonitor: https://mealie.punsvik.net
+            server: truenas
+            container: ix-mealie-mealie-1
+      - Grimmory:
+            icon: booklore.svg
+            href: https://grimmory.punsvik.net
+            description: Self-hosted book collection manager
+            siteMonitor: https://grimmory.punsvik.net
+            server: truenas
+            container: ix-grimmory-grimmory-1
+      - Shelfmark:
+            icon: mdi-bookshelf
+            href: https://shelfmark.punsvik.net
+            description: Book downloader
+            siteMonitor: https://shelfmark.punsvik.net
+            server: truenas
+            container: shelfmark
+      - Immich:
+            icon: immich.png
+            href: https://immich.punsvik.net
+            description: Photo & video management
+            siteMonitor: https://immich.punsvik.net
+            server: truenas
+            container: ix-immich-server-1
+      - Paperless-ngx:
+            icon: paperless-ngx.png
+            href: https://paperless.punsvik.net
+            description: Document management
+            siteMonitor: https://paperless.punsvik.net
+            server: truenas
+            container: ix-paperless-ngx-paperless-1
+      - Pottery Log:
+            icon: mdi-pot-outline
+            href: https://pottery.furuknappen.no
+            description: Pottery project log
+            siteMonitor: https://pottery.furuknappen.no
+            server: truenas
+            container: pottery-log
 
 - Tools:
-    - Supabase:
-        icon: supabase.png
-        href: https://supabase.furuknappen.no
-        description: Postgres backend & auth
-        siteMonitor: https://supabase.furuknappen.no
-        server: truenas
-        container: supabase-studio
-    - PocketBase:
-        icon: pocketbase.png
-        href: https://db.shopping-list.furuknappen.no/_/#/login
-        description: Backend for Shopping List [K8s]
-        siteMonitor: https://db.shopping-list.furuknappen.no/_/#/login
-    - Umami:
-        icon: umami.png
-        href: https://analytics.furuknappen.no
-        description: Privacy-focused web analytics
-        siteMonitor: https://analytics.furuknappen.no
-        server: truenas
-        container: ix-umami-umami-1
-    - Pocket ID:
-        icon: mdi-shield-account
-        href: https://auth.punsvik.net
-        description: Authentication & SSO
-        siteMonitor: https://auth.punsvik.net
-        server: truenas
-        container: ix-pocket-id-pocket-id-1
-    - ConvertX:
-        icon: mdi-file-swap-outline
-        href: https://convertx.punsvik.net
-        description: File format converter
-        siteMonitor: https://convertx.punsvik.net
-        server: truenas
-        container: ix-convertx-convertx-1
+      - Supabase:
+            icon: supabase.png
+            href: https://supabase.furuknappen.no
+            description: Postgres backend & auth
+            siteMonitor: https://supabase.furuknappen.no
+            server: truenas
+            container: supabase-studio
+      - PocketBase:
+            icon: pocketbase.png
+            href: https://db.shopping-list.furuknappen.no/_/#/login
+            description: Backend for Shopping List [K8s]
+            siteMonitor: https://db.shopping-list.furuknappen.no/_/#/login
+      - Umami:
+            icon: umami.png
+            href: https://analytics.furuknappen.no
+            description: Privacy-focused web analytics
+            siteMonitor: https://analytics.furuknappen.no
+            server: truenas
+            container: ix-umami-umami-1
+      - Pocket ID:
+            icon: mdi-shield-account
+            href: https://auth.punsvik.net
+            description: Authentication & SSO
+            siteMonitor: https://auth.punsvik.net
+            server: truenas
+            container: ix-pocket-id-pocket-id-1
+      - ConvertX:
+            icon: mdi-file-swap-outline
+            href: https://convertx.punsvik.net
+            description: File format converter
+            siteMonitor: https://convertx.punsvik.net
+            server: truenas
+            container: ix-convertx-convertx-1
 
 - Infrastructure:
-    - TrueNAS:
-        icon: truenas.png
-        href: https://nas.punsvik.net
-        description: NAS management UI
-        siteMonitor: https://nas.punsvik.net
-    - WireGuard:
-        icon: wireguard.png
-        href: https://vpn.punsvik.net
-        description: VPN
-        siteMonitor: https://vpn.punsvik.net
-        server: truenas
-    - Dozzle:
-        icon: dozzle.png
-        href: https://logs.punsvik.net
-        description: Docker container logs
-        server: truenas
-        container: ix-dozzle-dozzle-1
-    - Blocky UI:
-        icon: blocky.png
-        href: https://dns.punsvik.net
-        description: DNS management UI
-        server: truenas
-        container: blocky-ui
-    - Grafana:
-        icon: grafana.png
-        href: https://grafana.punsvik.net/a/grafana-lokiexplore-app/explore
-        description: Observability
-        siteMonitor: https://grafana.punsvik.net
-        server: truenas
-        container: grafana
-    - Traefik:
-        icon: traefik.png
-        href: https://traefik.punsvik.net
-        description: Reverse proxy
-        server: truenas
-        container: traefik
-    - Homepage:
-        icon: homepage.png
-        href: https://homepage.punsvik.net
-        description: Dashboard
-        server: truenas
-        container: ix-homepage-homepage-1
+      - TrueNAS:
+            icon: truenas.png
+            href: https://nas.punsvik.net
+            description: NAS management UI
+            siteMonitor: https://nas.punsvik.net
+      - WireGuard:
+            icon: wireguard.png
+            href: https://vpn.punsvik.net
+            description: VPN
+            siteMonitor: https://vpn.punsvik.net
+            server: truenas
+      - Dozzle:
+            icon: dozzle.png
+            href: https://logs.punsvik.net
+            description: Docker container logs
+            server: truenas
+            container: ix-dozzle-dozzle-1
+      - Blocky UI:
+            icon: blocky.png
+            href: https://dns.punsvik.net
+            description: DNS management UI
+            server: truenas
+            container: blocky-ui
+      - DDNS Updater:
+            icon: mdi-dns
+            href: https://ddns.punsvik.net
+            description: Dynamic DNS
+            siteMonitor: https://ddns.punsvik.net
+            server: truenas
+            container: ddns-updater
+      - Grafana:
+            icon: grafana.png
+            href: https://grafana.punsvik.net/a/grafana-lokiexplore-app/explore
+            description: Observability
+            siteMonitor: https://grafana.punsvik.net
+            server: truenas
+            container: grafana
+      - Traefik:
+            icon: traefik.png
+            href: https://traefik.punsvik.net
+            description: Reverse proxy
+            server: truenas
+            container: traefik
+      - Homepage:
+            icon: homepage.png
+            href: https://homepage.punsvik.net
+            description: Dashboard
+            server: truenas
+            container: ix-homepage-homepage-1
 
 - Backend:
-    - Blocky:
-        icon: blocky.png
-        href: https://dns.punsvik.net
-        description: DNS ad-blocker
-        server: truenas
-        container: blocky
-    - Joplin:
-        icon: joplin.png
-        href: https://joplin.punsvik.net
-        description: Joplin sync server
-        server: truenas
-        container: ix-joplin-joplin-1
-    - Obsidian Livesync:
-        icon: obsidian.png
-        href: https://obsidian.punsvik.net
-        description: Obsidian sync backend (CouchDB)
-        server: truenas
-        container: obsidian-sync
-    - Syncthing:
-        icon: syncthing.png
-        href: https://syncthing.punsvik.net
-        description: File sync
-        siteMonitor: https://syncthing.punsvik.net
-        server: truenas
-        container: ix-syncthing-syncthing-1
+      - Blocky:
+            icon: blocky.png
+            href: https://dns.punsvik.net
+            description: DNS ad-blocker
+            server: truenas
+            container: blocky
+      - Joplin:
+            icon: joplin.png
+            href: https://joplin.punsvik.net
+            description: Joplin sync server
+            server: truenas
+            container: ix-joplin-joplin-1
+      - Obsidian Livesync:
+            icon: obsidian.png
+            href: https://obsidian.punsvik.net
+            description: Obsidian sync backend (CouchDB)
+            server: truenas
+            container: obsidian-sync
+      - Syncthing:
+            icon: syncthing.png
+            href: https://syncthing.punsvik.net
+            description: File sync
+            siteMonitor: https://syncthing.punsvik.net
+            server: truenas
+            container: ix-syncthing-syncthing-1

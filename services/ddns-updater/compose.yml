@@ -1,0 +1,39 @@
+# ddns-updater - Keeps Cloudflare A record(s) pointed at the home WAN IP.
+# https://github.com/qdm12/ddns-updater
+#
+# Config lives at ./data/config.json (gitignored).
+# Copy ./data/config.json.example → ./data/config.json and fill in token + zone_identifier.
+
+services:
+  ddns-updater:
+    image: qmcgaw/ddns-updater:${DDNS_UPDATER_IMAGE_TAG:-v2.10.0}
+    container_name: ddns-updater
+    restart: unless-stopped
+    user: "568:568"
+    # Bypass Blocky's split-horizon view of punsvik.net so the built-in
+    # healthcheck (DNS lookup vs. detected public IP) actually passes.
+    dns:
+      - 1.1.1.1
+      - 9.9.9.9
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.ddns-updater.rule=Host(`ddns.punsvik.net`)"
+      - "traefik.http.routers.ddns-updater.entrypoints=websecure"
+      - "traefik.http.routers.ddns-updater.tls.certresolver=le"
+      - "traefik.http.routers.ddns-updater.middlewares=security-headers@file,internal-only@file"
+      - "traefik.http.services.ddns-updater.loadbalancer.server.port=8000"
+    environment:
+      PERIOD: 6h
+      LOG_LEVEL: info
+      HTTP_TIMEOUT: 10s
+      PUBLICIP_FETCHERS: all
+      PUBLICIPV4_HTTP_PROVIDERS: all
+    volumes:
+      - ./data:/updater/data
+    networks:
+      - traefik
+
+networks:
+  traefik:
+    external: true
+    name: traefik

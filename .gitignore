@@ -4,6 +4,11 @@ logs/
 .claude/
 docs/superpowers/
 
+# ddns-updater config holds the Cloudflare API token
+services/ddns-updater/data/config.json
+# Persisted state (history of IP changes)
+services/ddns-updater/data/updates.json
+
 # Home Assistant runtime/generated/secrets
 services/home-assistant/SERVICE_ACCOUNT.json
 services/home-assistant/.HA_VERSION
