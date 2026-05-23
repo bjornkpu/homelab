@@ -1,0 +1,34 @@
+# RustDesk Server OSS — self-hosted ID/relay for RustDesk remote desktop.
+# https://rustdesk.com/docs/en/self-host/rustdesk-server-oss/docker/
+#
+# Not Traefik-fronted: native clients speak raw TCP/UDP on 21115-21117.
+# Requires router port-forwards (21115-21117/tcp, 21116/udp) to the NAS.
+# Server public key is written to /mnt/main/appdata/rustdesk/id_ed25519.pub
+# on first start — paste it into each client under Network → ID/Relay Server.
+
+services:
+  hbbs:
+    image: rustdesk/rustdesk-server:${RUSTDESK_IMAGE_TAG:-latest}
+    container_name: hbbs
+    restart: unless-stopped
+    command: hbbs -r rustdesk.punsvik.net:21117
+    ports:
+      - "21115:21115"
+      - "21116:21116"
+      - "21116:21116/udp"
+      - "21118:21118"
+    volumes:
+      - /mnt/main/appdata/rustdesk:/root
+    depends_on:
+      - hbbr
+
+  hbbr:
+    image: rustdesk/rustdesk-server:${RUSTDESK_IMAGE_TAG:-latest}
+    container_name: hbbr
+    restart: unless-stopped
+    command: hbbr
+    ports:
+      - "21117:21117"
+      - "21119:21119"
+    volumes:
+      - /mnt/main/appdata/rustdesk:/root
