@@ -28,6 +28,19 @@ http:
         frameDeny: true
         customFrameOptionsValue: "SAMEORIGIN"
 
+    # Security headers without X-Frame-Options.
+    # LG webOS Jellyfin client fails with error -27 when X-Frame-Options is set.
+    security-headers-no-frame:
+      headers:
+        sslRedirect: true
+        forceSTSHeader: true
+        stsSeconds: 31536000
+        stsIncludeSubdomains: true
+        stsPreload: true
+        contentTypeNosniff: true
+        browserXssFilter: true
+        referrerPolicy: "same-origin"
+
     # Pocket ID authentication (when you deploy it)
     pocket-id-auth:
       forwardAuth:

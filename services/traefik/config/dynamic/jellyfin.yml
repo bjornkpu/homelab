@@ -11,7 +11,7 @@ http:
       tls:
         certResolver: le
       middlewares:
-        - security-headers@file
+        - security-headers-no-frame@file
 
   services:
     jellyfin-svc:
