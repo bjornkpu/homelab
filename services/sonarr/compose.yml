@@ -1,0 +1,32 @@
+# Sonarr - TV series management & automation
+# https://github.com/linuxserver/docker-sonarr
+#
+# Monitors TV series, searches Prowlarr for episodes,
+# sends downloads to qBittorrent, renames and organizes files.
+
+services:
+  sonarr:
+    image: lscr.io/linuxserver/sonarr:latest
+    container_name: sonarr
+    restart: unless-stopped
+    environment:
+      - PUID=568
+      - PGID=568
+      - TZ=Europe/Oslo
+    volumes:
+      - /mnt/main/appdata/sonarr:/config
+      - /mnt/main/media:/media
+    networks:
+      - traefik
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.sonarr.rule=Host(`sonarr.punsvik.net`)
+      - traefik.http.routers.sonarr.entrypoints=websecure
+      - traefik.http.routers.sonarr.tls.certresolver=le
+      - traefik.http.routers.sonarr.middlewares=internal-only@file,security-headers@file
+      - traefik.http.services.sonarr.loadbalancer.server.port=8989
+
+networks:
+  traefik:
+    external: true
+    name: traefik

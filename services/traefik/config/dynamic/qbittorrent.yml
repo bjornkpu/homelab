@@ -1,0 +1,21 @@
+# Traefik Dynamic Configuration - qBittorrent (Custom Compose via Gluetun)
+# Proxies qbittorrent.punsvik.net to gluetun:8080 (LAN-only)
+
+http:
+  routers:
+    qbittorrent:
+      rule: "Host(`qbittorrent.punsvik.net`)"
+      entryPoints:
+        - websecure
+      service: qbittorrent-svc
+      tls:
+        certResolver: le
+      middlewares:
+        - internal-only@file
+        - security-headers@file
+
+  services:
+    qbittorrent-svc:
+      loadBalancer:
+        servers:
+          - url: "http://gluetun:8085"

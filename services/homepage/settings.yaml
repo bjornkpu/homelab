@@ -19,6 +19,9 @@ favicon: https://raw.githubusercontent.com/gethomepage/homepage/main/public/home
 headerStyle: clean
 
 layout:
+  Media:
+    style: row
+    columns: 5
   Home:
     style: row
     columns: 5

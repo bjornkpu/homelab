@@ -1,0 +1,18 @@
+# Prowlarr - Indexer manager / search aggregator
+# https://github.com/linuxserver/docker-prowlarr
+#
+# Routes ALL traffic through gluetun VPN.
+# Start gluetun first.
+
+services:
+  prowlarr:
+    image: lscr.io/linuxserver/prowlarr:latest
+    container_name: prowlarr
+    restart: unless-stopped
+    network_mode: "container:gluetun"
+    environment:
+      - PUID=568
+      - PGID=568
+      - TZ=Europe/Oslo
+    volumes:
+      - /mnt/main/appdata/prowlarr:/config

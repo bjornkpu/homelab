@@ -1,0 +1,21 @@
+# Traefik Dynamic Configuration - Prowlarr (Custom Compose via Gluetun)
+# Proxies prowlarr.punsvik.net to gluetun:9696 (LAN-only)
+
+http:
+  routers:
+    prowlarr:
+      rule: "Host(`prowlarr.punsvik.net`)"
+      entryPoints:
+        - websecure
+      service: prowlarr-svc
+      tls:
+        certResolver: le
+      middlewares:
+        - internal-only@file
+        - security-headers@file
+
+  services:
+    prowlarr-svc:
+      loadBalancer:
+        servers:
+          - url: "http://gluetun:9696"

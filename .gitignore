@@ -3,6 +3,8 @@ laravel.env
 logs/
 .claude/
 docs/superpowers/
+tmp/
+.claude-sessions/
 
 # ddns-updater config holds the Cloudflare API token
 services/ddns-updater/data/config.json

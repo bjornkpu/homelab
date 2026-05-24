@@ -1,6 +1,55 @@
 ---
 # Homepage Services Configuration
 
+- Media:
+      - Jellyfin:
+            icon: jellyfin.png
+            href: https://jellyfin.punsvik.net
+            description: Movies & TV streaming
+            siteMonitor: https://jellyfin.punsvik.net
+      - Grimmory:
+            icon: booklore.svg
+            href: https://grimmory.punsvik.net
+            description: Book collection manager
+            siteMonitor: https://grimmory.punsvik.net
+            server: truenas
+            container: ix-grimmory-grimmory-1
+      - Sonarr:
+            icon: sonarr.png
+            href: https://sonarr.punsvik.net
+            description: TV series manager
+            siteMonitor: https://sonarr.punsvik.net
+            server: truenas
+            container: sonarr
+      - Radarr:
+            icon: radarr.png
+            href: https://radarr.punsvik.net
+            description: Movie manager
+            siteMonitor: https://radarr.punsvik.net
+            server: truenas
+            container: radarr
+      - Shelfmark:
+            icon: mdi-bookshelf
+            href: https://shelfmark.punsvik.net
+            description: Book downloader
+            siteMonitor: https://shelfmark.punsvik.net
+            server: truenas
+            container: shelfmark
+      - Prowlarr:
+            icon: prowlarr.png
+            href: https://prowlarr.punsvik.net
+            description: Indexer search
+            siteMonitor: https://prowlarr.punsvik.net
+            server: truenas
+            container: prowlarr
+      - qBittorrent:
+            icon: qbittorrent.png
+            href: https://qbittorrent.punsvik.net
+            description: Torrent client (VPN)
+            siteMonitor: https://qbittorrent.punsvik.net
+            server: truenas
+            container: qbittorrent
+
 - Home:
       - Home Assistant:
             icon: home-assistant.png
@@ -40,20 +89,6 @@
             siteMonitor: https://mealie.punsvik.net
             server: truenas
             container: ix-mealie-mealie-1
-      - Grimmory:
-            icon: booklore.svg
-            href: https://grimmory.punsvik.net
-            description: Self-hosted book collection manager
-            siteMonitor: https://grimmory.punsvik.net
-            server: truenas
-            container: ix-grimmory-grimmory-1
-      - Shelfmark:
-            icon: mdi-bookshelf
-            href: https://shelfmark.punsvik.net
-            description: Book downloader
-            siteMonitor: https://shelfmark.punsvik.net
-            server: truenas
-            container: shelfmark
       - Immich:
             icon: immich.png
             href: https://immich.punsvik.net
