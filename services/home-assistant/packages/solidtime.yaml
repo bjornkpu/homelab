@@ -25,11 +25,11 @@ rest_command:
       authorization: "Bearer {{token}}"
       content-type: "application/json"
       accept: "application/json"
-    payload: "{\"end\":\"{{end_time}}\"}"
+    payload: '{"end":"{{end_time}}"}'
 
 script:
-  solidtime_start_mimir:
-    alias: "Solid Time: Start Mimir"
+  solidtime_start:
+    alias: "Solid Time: Start"
     sequence:
       - service: rest_command.solidtime_start
         data:
@@ -37,7 +37,7 @@ script:
           org_id: !secret solidtime_org_id
           member_id: !secret solidtime_member_id
           token: !secret solidtime_token
-          project_id: !secret solidtime_project_mimir
+          project_id: !secret solidtime_project_kai
         response_variable: result
       - choose:
           - conditions: "{{ result.status not in [200, 201] }}"
