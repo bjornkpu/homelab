@@ -108,7 +108,7 @@ PGRST_DB_SCHEMAS=public,myapp
 Then restart via TrueNAS:
 
 ```bash
-ssh nas "midclt call 'app.restart' '\"supabase\"'"
+ssh nas 'midclt -t 300 call -j app.redeploy "\"supabase\""'
 ```
 
 ### Step 3 — Create tables with RLS
