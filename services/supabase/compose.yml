@@ -280,6 +280,9 @@ services:
       NEXT_PUBLIC_ENABLE_LOGS: "false"
       NEXT_ANALYTICS_BACKEND_PROVIDER: postgres
       HOSTNAME: "::"
+      SNIPPETS_MANAGEMENT_FOLDER: /app/snippets
+    volumes:
+      - /mnt/main/appdata/supabase/snippets:/app/snippets
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.supabase-studio.rule=Host(`supabase.furuknappen.no`)"
