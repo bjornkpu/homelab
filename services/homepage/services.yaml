@@ -110,6 +110,13 @@
             siteMonitor: https://pottery.furuknappen.no
             server: truenas
             container: pottery-log
+      - AdventureLog:
+            icon: adventurelog.png
+            href: https://travel.punsvik.net
+            description: Travel & adventure log
+            siteMonitor: https://travel.punsvik.net
+            server: truenas
+            container: ix-adventurelog-frontend-1
 
 - Tools:
       - Supabase:
