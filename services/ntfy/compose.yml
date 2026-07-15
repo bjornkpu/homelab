@@ -1,0 +1,55 @@
+# ntfy - Self-hosted push notifications (Android + iOS)
+# https://docs.ntfy.sh/config/
+#
+# iOS note: iOS forbids the persistent connection Android uses, so a purely
+# self-hosted server can't deliver instant iOS pushes. NTFY_UPSTREAM_BASE_URL
+# forwards a tiny poll-trigger (topic + message id only, no payload) through
+# ntfy.sh's APNs relay; the iOS app then pulls the full message from this
+# server. Requires cache-file to be set so messages are retrievable. Android
+# ignores the relay and stays instant.
+#
+# First-run (server is deny-all; create a user before anything works):
+#   ssh nas 'sudo docker exec -it ntfy ntfy user add --role=admin bk'
+#   # then subscribe to topics in the app pointing at https://ntfy.punsvik.net
+
+services:
+  ntfy:
+    image: binwiederhier/ntfy:${NTFY_IMAGE_TAG:-v2.11.0}
+    container_name: ntfy
+    restart: unless-stopped
+    command: serve
+    user: "568:568"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.ntfy.rule=Host(`ntfy.punsvik.net`)"
+      - "traefik.http.routers.ntfy.entrypoints=websecure"
+      - "traefik.http.routers.ntfy.tls.certresolver=le"
+      - "traefik.http.routers.ntfy.middlewares=security-headers@file"
+      - "traefik.http.services.ntfy.loadbalancer.server.port=8080"
+    environment:
+      TZ: Europe/Oslo
+      NTFY_BASE_URL: https://ntfy.punsvik.net
+      NTFY_LISTEN_HTTP: ":8080"
+      NTFY_BEHIND_PROXY: "true"
+      NTFY_CACHE_FILE: /var/cache/ntfy/cache.db
+      NTFY_CACHE_DURATION: "12h"
+      NTFY_ATTACHMENT_CACHE_DIR: /var/cache/ntfy/attachments
+      NTFY_AUTH_FILE: /var/lib/ntfy/user.db
+      NTFY_AUTH_DEFAULT_ACCESS: deny-all
+      NTFY_UPSTREAM_BASE_URL: https://ntfy.sh
+    healthcheck:
+      test: ["CMD-SHELL", "wget -q --tries=1 -O - http://localhost:8080/v1/health 2>/dev/null | grep -Eo '\"healthy\"\\s*:\\s*true' || exit 1"]
+      interval: 60s
+      timeout: 10s
+      retries: 3
+      start_period: 20s
+    volumes:
+      - /mnt/main/appdata/ntfy/lib:/var/lib/ntfy
+      - /mnt/main/appdata/ntfy/cache:/var/cache/ntfy
+    networks:
+      - traefik
+
+networks:
+  traefik:
+    external: true
+    name: traefik

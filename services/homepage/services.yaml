@@ -119,6 +119,13 @@
             container: ix-adventurelog-frontend-1
 
 - Tools:
+      - Outline:
+            icon: outline.png
+            href: https://outline.punsvik.net
+            description: Team wiki & documentation
+            siteMonitor: https://outline.punsvik.net
+            server: truenas
+            container: ix-outline-outline-1
       - Supabase:
             icon: supabase.png
             href: https://supabase.furuknappen.no
@@ -152,6 +159,20 @@
             siteMonitor: https://convertx.punsvik.net
             server: truenas
             container: ix-convertx-convertx-1
+      - ChangeDetection.io:
+            icon: mdi-web-sync
+            href: https://changedetection.punsvik.net
+            description: Website change monitor
+            siteMonitor: https://changedetection.punsvik.net
+            server: truenas
+            container: ix-change-detection-change-detection-1
+      - ntfy:
+            icon: mdi-bell-ring
+            href: https://ntfy.punsvik.net
+            description: Push notifications (Android + iOS)
+            siteMonitor: https://ntfy.punsvik.net
+            server: truenas
+            container: ntfy
 
 - Infrastructure:
       - TrueNAS:
