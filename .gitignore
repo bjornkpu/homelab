@@ -29,3 +29,4 @@ services/home-assistant/backups/
 services/home-assistant/image/
 services/home-assistant/secrets.yaml
 services/home-assistant/HCQROA~F
+services/home-assistant/zigbee.db*
