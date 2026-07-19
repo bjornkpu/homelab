@@ -1,0 +1,24 @@
+# Reference copy of configuration.yaml — the real file is NOT tracked in git.
+#
+# The TrueNAS Home Assistant app injects the Postgres recorder db_url (with the
+# DB password in cleartext) into configuration.yaml on every deploy, so the live
+# file is gitignored to keep the secret out of the repo. Set the DB password via
+# the TrueNAS app UI: Apps > home-assistant > Edit > Database Password.
+#
+# Do NOT use `!secret` for db_url: the app overwrites that line on deploy and HA
+# drops into recovery mode.
+
+default_config:
+tts:
+  - platform: google_translate
+automation: !include automations.yaml
+script: !include scripts.yaml
+scene: !include scenes.yaml
+recorder:
+  purge_keep_days: 30
+  commit_interval: 3
+  db_url: postgresql://home-assistant:REDACTED@postgres:5432/home-assistant?sslmode=disable
+google_assistant: !include google_assistant.yaml
+http: !include http.yaml
+homeassistant:
+  packages: !include_dir_named packages

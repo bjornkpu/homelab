@@ -5,6 +5,7 @@ logs/
 docs/superpowers/
 tmp/
 .claude-sessions/
+c/
 
 # ddns-updater config holds the Cloudflare API token
 services/ddns-updater/data/config.json
@@ -28,5 +29,7 @@ services/home-assistant/home-assistant_v2.db*
 services/home-assistant/backups/
 services/home-assistant/image/
 services/home-assistant/secrets.yaml
+# app-managed: TrueNAS injects the Postgres db_url (password in cleartext) on every deploy
+services/home-assistant/configuration.yaml
 services/home-assistant/HCQROA~F
 services/home-assistant/zigbee.db*
