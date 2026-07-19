@@ -35,16 +35,12 @@
   conditions:
   - condition: or
     conditions:
-    - condition: device
-      device_id: 90f1a03ca8277cb1d89fea5325a99b78
-      domain: device_tracker
-      entity_id: c834c7e7da8959ecdde31e59de2053f0
-      type: is_home
-    - condition: device
-      device_id: 29c50b188dd61d87982fe20f317889f1
-      domain: device_tracker
-      entity_id: b65a548a793c50d81f26bd924500b4e5
-      type: is_home
+    - condition: state
+      entity_id: device_tracker.camilla_sin_iphone
+      state: home
+    - condition: state
+      entity_id: device_tracker.bk_phone
+      state: home
   actions:
   - action: scene.turn_on
     metadata: {}
@@ -62,16 +58,12 @@
   conditions:
   - condition: or
     conditions:
-    - condition: device
-      device_id: 29c50b188dd61d87982fe20f317889f1
-      domain: device_tracker
-      entity_id: b65a548a793c50d81f26bd924500b4e5
-      type: is_home
-    - condition: device
-      device_id: 90f1a03ca8277cb1d89fea5325a99b78
-      domain: device_tracker
-      entity_id: c834c7e7da8959ecdde31e59de2053f0
-      type: is_home
+    - condition: state
+      entity_id: device_tracker.bk_phone
+      state: home
+    - condition: state
+      entity_id: device_tracker.camilla_sin_iphone
+      state: home
   actions:
   - action: scene.turn_on
     metadata: {}
