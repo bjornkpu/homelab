@@ -4,6 +4,7 @@ logs/
 .claude/
 docs/superpowers/
 tmp/
+.tmp/
 .claude-sessions/
 c/
 
