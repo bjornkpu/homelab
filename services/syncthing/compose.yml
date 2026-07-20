@@ -1,0 +1,54 @@
+# Syncthing — always-on sync hub for the personal-config mesh.
+# https://hub.docker.com/r/syncthing/syncthing
+#
+# Replaces the old TrueNAS Apps-store Syncthing. Before deploying:
+#   1. Take down the old app (TrueNAS Apps UI) so ports/dataset are free.
+#   2. Remove services/traefik/config/dynamic/syncthing.yml — routing is now
+#      done by the Traefik labels below; keeping both = duplicate "syncthing" router.
+#
+# Datasets to create first (not done here):
+#   main/appdata/syncthing            (config.xml + keys/certs)
+#   main/appdata/syncthing/data       (parent of every synced folder)
+#   chown to the apps preset (568:568) to match PUID/PGID below.
+#
+# Two traffic paths:
+#   - GUI (8384): fronted by Traefik at syncthing.punsvik.net, LAN-only. This is
+#     the one GUI you use — configure the whole mesh here (add devices, create
+#     folders, share them); spokes just accept the offers.
+#   - Sync protocol (22000 tcp+udp): raw, host-published. Forward these on the
+#     router to 192.168.1.4 so remote spokes can reach the hub. 21027/udp is
+#     LAN discovery only.
+#
+# Synced folders live under /var/syncthing/data/<name> INSIDE the container.
+
+services:
+  syncthing:
+    image: syncthing/syncthing:${SYNCTHING_IMAGE_TAG:-1}
+    container_name: syncthing
+    restart: unless-stopped
+    hostname: truenas
+    environment:
+      PUID: "568"
+      PGID: "568"
+      STGUIADDRESS: "0.0.0.0:8384"   # listen on all interfaces so Traefik can reach it
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.syncthing.rule=Host(`syncthing.punsvik.net`)"
+      - "traefik.http.routers.syncthing.entrypoints=websecure"
+      - "traefik.http.routers.syncthing.tls.certresolver=le"
+      - "traefik.http.routers.syncthing.middlewares=security-headers@file,internal-only@file"
+      - "traefik.http.services.syncthing.loadbalancer.server.port=8384"
+    ports:
+      - "22000:22000/tcp"          # sync protocol (TCP) — forward on router
+      - "22000:22000/udp"          # sync protocol (QUIC) — forward on router
+      - "21027:21027/udp"          # LAN discovery broadcasts
+    volumes:
+      - /mnt/main/appdata/syncthing/config:/var/syncthing/config
+      - /mnt/main/appdata/syncthing/data:/var/syncthing/data
+    networks:
+      - traefik
+
+networks:
+  traefik:
+    external: true
+    name: traefik

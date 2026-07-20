@@ -250,4 +250,4 @@
             description: File sync
             siteMonitor: https://syncthing.punsvik.net
             server: truenas
-            container: ix-syncthing-syncthing-1
+            container: syncthing
