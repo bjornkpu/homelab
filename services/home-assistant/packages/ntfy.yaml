@@ -1,0 +1,13 @@
+rest_command:
+  ntfy:
+    url: https://ntfy.punsvik.net
+    method: POST
+    headers:
+      Authorization: !secret ntfy_authorization
+    content_type: "application/json; charset=utf-8"
+    payload: >-
+      {"topic": "home",
+       "title": {{ (title | default("Home Assistant", true)) | to_json }},
+       "message": {{ message | to_json }},
+       "priority": {{ priority | default(3) }},
+       "tags": {{ (tags | default([])) | to_json }}}

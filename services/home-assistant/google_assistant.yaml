@@ -5,3 +5,23 @@ exposed_domains:
   - switch
   - light
   - scene
+entity_config:
+  script.watch_spotify:
+    name: Spotify TV
+    expose: true
+  script.watch_youtube:
+    name: YouTube TV
+    expose: true
+  script.watch_prime:
+    name: Prime TV
+    expose: true
+  script.watch_jellyfin:
+    name: Jellyfin
+    expose: true
+  media_player.living_room_tv:
+    expose: false
+  media_player.tv_universal:
+    name: Living Room TV
+    expose: true
+  switch.living_room_tv:
+    expose: false

@@ -22,3 +22,17 @@ google_assistant: !include google_assistant.yaml
 http: !include http.yaml
 homeassistant:
   packages: !include_dir_named packages
+lovelace:
+  dashboards:
+    tablet-home:
+      mode: yaml
+      title: Tablet
+      icon: mdi:tablet-dashboard
+      filename: dashboards/tablet.yaml
+      show_in_sidebar: true
+    web-home:
+      mode: yaml
+      title: Home
+      icon: mdi:home
+      filename: dashboards/home.yaml
+      show_in_sidebar: true

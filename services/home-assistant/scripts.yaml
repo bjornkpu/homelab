@@ -1,0 +1,71 @@
+tv_ensure_on:
+  alias: TV ensure on
+  icon: mdi:television
+  sequence:
+  - if:
+    - condition: state
+      entity_id: media_player.living_room_tv
+      state:
+      - 'off'
+      - unavailable
+    then:
+    - action: button.press
+      target:
+        entity_id: button.living_room_tv_power
+    - wait_template: >-
+        {{ not is_state('media_player.living_room_tv', 'unavailable')
+           and not is_state('media_player.living_room_tv', 'off') }}
+      timeout: '00:00:30'
+      continue_on_timeout: false
+    - delay: '00:00:03'
+  mode: single
+watch_spotify:
+  alias: Spotify
+  icon: mdi:spotify
+  sequence:
+  - action: script.tv_ensure_on
+  - action: media_player.select_source
+    target:
+      entity_id: media_player.living_room_tv
+    data:
+      source: Spotify - Music and Podcasts
+  mode: single
+watch_youtube:
+  alias: YouTube
+  icon: mdi:youtube
+  sequence:
+  - action: script.tv_ensure_on
+  - action: media_player.select_source
+    target:
+      entity_id: media_player.living_room_tv
+    data:
+      source: YouTube
+  mode: single
+watch_prime:
+  alias: Prime Video
+  icon: mdi:filmstrip
+  sequence:
+  - action: script.tv_ensure_on
+  - action: media_player.select_source
+    target:
+      entity_id: media_player.living_room_tv
+    data:
+      source: Prime Video
+  - action: scene.turn_on
+    target:
+      entity_id: scene.cozy
+  mode: single
+watch_jellyfin:
+  alias: Jellyfin
+  icon: mdi:jellyfish
+  sequence:
+  - action: script.tv_ensure_on
+  - action: media_player.select_source
+    target:
+      entity_id: media_player.living_room_tv
+    data:
+      source: Jellyfin
+  - action: scene.turn_on
+    target:
+      entity_id: scene.cozy
+  mode: single

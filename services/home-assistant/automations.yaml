@@ -24,7 +24,7 @@
     data:
       transition: 5
     target:
-      entity_id: scene.night_mode
+      entity_id: scene.night
   mode: single
 - id: '1744833575546'
   alias: Evening
@@ -47,7 +47,7 @@
     data:
       transition: 20
     target:
-      entity_id: scene.evning
+      entity_id: scene.evening
   mode: single
 - id: '1744833637322'
   alias: Day
@@ -99,4 +99,111 @@
       transition: 5
     target:
       entity_id: scene.morning
+  mode: single
+- id: '1752901000001'
+  alias: Laundry - washer done
+  description: Notify when the washing machine finishes a cycle.
+  triggers:
+  - trigger: state
+    entity_id:
+    - sensor.washing_machine_machine_state
+    from: run
+    to: stop
+  conditions: []
+  actions:
+  - action: notify.mobile_app_sm_s931b
+    data:
+      title: Vask
+      message: Vaskemaskinen er ferdig
+  mode: single
+- id: '1752901000002'
+  alias: Laundry - dryer done
+  description: Notify when the tumble dryer finishes a cycle.
+  triggers:
+  - trigger: state
+    entity_id:
+    - sensor.tumble_dryer_machine_state
+    from: run
+    to: stop
+  conditions: []
+  actions:
+  - action: notify.mobile_app_sm_s931b
+    data:
+      title: "T\xF8rk"
+      message: "T\xF8rketrommelen er ferdig"
+  mode: single
+- id: '1752901000003'
+  alias: Low sensor battery
+  description: Notify when a Zigbee sensor/remote battery drops below 15%.
+  triggers:
+  - trigger: numeric_state
+    entity_id:
+    - sensor.office_climate_battery
+    - sensor.outside_climate_battery
+    - sensor.living_room_climate_battery
+    - sensor.bedroom_dimmer_battery
+    - sensor.living_room_remote_battery
+    below: 15
+    for: '01:00:00'
+  conditions: []
+  actions:
+  - action: notify.mobile_app_sm_s931b
+    data:
+      title: Lavt batteri
+      message: "{{ trigger.to_state.name }} er p\xE5 {{ trigger.to_state.state }}%"
+  mode: single
+- id: '1752901000004'
+  alias: Update available
+  description: Notify when any update entity reports an available update.
+  triggers:
+  - trigger: state
+    entity_id:
+    - update.hacs_update
+    - update.hourly_weather_card_update
+    - update.aqara_t1_a_firmware
+    - update.aqara_t1_b_firmware
+    - update.aqara_lumi_sensor_ht_agl001_firmware
+    to: 'on'
+  conditions: []
+  actions:
+  - action: notify.mobile_app_sm_s931b
+    data:
+      title: Oppdatering
+      message: "{{ trigger.to_state.name }} har en tilgjengelig oppdatering"
+  mode: single
+- id: '1752901000005'
+  alias: Frost warning outside
+  description: Notify when the outside temperature drops below freezing.
+  triggers:
+  - trigger: numeric_state
+    entity_id:
+    - sensor.outside_temperature
+    below: 0
+    for: '00:30:00'
+  conditions: []
+  actions:
+  - action: notify.mobile_app_sm_s931b
+    data:
+      title: Frost
+      message: "Frost ute ({{ states('sensor.outside_temperature') }}\xB0C)"
+  mode: single
+- id: '1752901000006'
+  alias: Open windows - cooler outside
+  description: Hint to open windows when it is warm inside and meaningfully cooler
+    outside.
+  triggers:
+  - trigger: template
+    value_template: >-
+      {{ states('sensor.living_room_temperature') | float(0) > 24
+         and states('sensor.outside_temperature') | float(0)
+             < states('sensor.living_room_temperature') | float(0) - 3
+         and states('sensor.outside_temperature') | float(0) > 10 }}
+    for: '00:15:00'
+  conditions: []
+  actions:
+  - action: notify.mobile_app_sm_s931b
+    data:
+      title: Luft
+      message: "Kaldere ute ({{ states('sensor.outside_temperature') }}\xB0C) enn
+        inne ({{ states('sensor.living_room_temperature') }}\xB0C) - luft?"
   mode: single

@@ -1,0 +1,16 @@
+media_player:
+  - platform: universal
+    name: TV Universal
+    unique_id: tv_universal
+    device_class: tv
+    children:
+      - media_player.living_room_tv
+    commands:
+      turn_on:
+        action: button.press
+        target:
+          entity_id: button.living_room_tv_power
+      turn_off:
+        action: media_player.turn_off
+        target:
+          entity_id: media_player.living_room_tv
