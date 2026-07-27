@@ -251,3 +251,9 @@
             siteMonitor: https://syncthing.punsvik.net
             server: truenas
             container: syncthing
+      - RustDesk:
+            icon: rustdesk.png
+            href: https://rustdesk.com
+            description: Self-hosted remote desktop ID/relay
+            server: truenas
+            container: hbbs

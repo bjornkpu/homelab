@@ -1,8 +1,9 @@
 # RustDesk Server OSS
 
-> **Status: not deployed.** Compose file is staged; this README is the playbook
-> for the day you decide to bring it up. Nothing in this folder is running until
-> you run step 3.
+> **Status: deployed 2026-07-27.** Both containers are running on the NAS.
+> Steps 1-3 and 5 below are done; the remaining manual steps are the router
+> port-forwards (step 4) and per-client config (step 6). Server public key:
+> `VWAuJx+SBpQJsuFPkmFq2YQLtyLdiSoKvWtgF7z9P4E=`
 
 Self-hosted ID + relay for the RustDesk remote desktop client.
 https://rustdesk.com/docs/en/self-host/rustdesk-server-oss/docker/
