@@ -1,0 +1,116 @@
+title: Hallway
+views:
+  - title: Hallway
+    path: hallway
+    type: custom:grid-layout
+    layout:
+      grid-template-columns: 1fr 1fr
+      grid-template-rows: auto auto 1fr
+      grid-template-areas: |
+        "clock outlook"
+        "vibe vibe"
+        "hourly hourly"
+      grid-gap: 10px
+      margin: 6px
+      height: 100%
+      mediaquery:
+        # portrait / narrow -> single column
+        "(max-width: 700px)":
+          grid-template-columns: minmax(0, 1fr)
+          grid-template-rows: auto auto auto 1fr
+          grid-template-areas: |
+            "clock"
+            "outlook"
+            "vibe"
+            "hourly"
+    cards:
+      # ---- clock + greeting ----
+      - type: vertical-stack
+        view_layout: {grid-area: clock}
+        cards:
+          - type: clock
+            clock_size: large
+            show_seconds: false
+          - type: horizontal-stack
+            cards:
+              - type: custom:mushroom-template-card
+                primary: >-
+                  {% set h = now().hour %}{% set d = now().weekday() %}
+                  {% if d == 4 and h >= 15 %}Endelig fredag!{% elif d >= 5 %}God helg!
+                  {% elif h < 5 %}God natt{% elif h < 10 %}God morgen{% elif h < 18 %}Hei
+                  {% else %}God kveld{% endif %}
+                secondary: "{{ now().strftime('%A %d. %B') }}"
+                icon: mdi:calendar-heart
+                icon_color: amber
+              - type: custom:mushroom-template-card
+                primary: >-
+                  ☀️↑ {{ as_timestamp(state_attr('sun.sun', 'next_rising')) | timestamp_custom('%H:%M') }}
+                  · ☀️↓ {{ as_timestamp(state_attr('sun.sun', 'next_setting')) | timestamp_custom('%H:%M') }}
+                secondary: Soltider
+                icon: mdi:weather-sunset
+                icon_color: orange
+
+      # ---- multi-day outlook ----
+      - type: weather-forecast
+        view_layout: {grid-area: outlook}
+        entity: weather.forecast_home
+        show_current: false
+        forecast_type: daily
+        forecast_slots: 4
+        name: Framover
+
+      # ---- today's vibe: dress tip · thought · sun ----
+      - type: custom:layout-card
+        view_layout: {grid-area: vibe}
+        layout_type: custom:grid-layout
+        layout:
+          grid-template-columns: repeat(auto-fit, minmax(220px, 1fr))
+          grid-gap: 10px
+        cards:
+          - type: custom:mushroom-template-card
+            primary: >-
+              {% set c = states('weather.forecast_home') %}
+              {% set t = state_attr('weather.forecast_home', 'temperature') | float(0) %}
+              {% if 'rain' in c or 'pour' in c %}Ta med paraply!
+              {% elif 'snow' in c %}Snø ute - kle deg godt!
+              {% elif t < 0 %}Iskaldt - pakk deg godt inn!
+              {% elif t < 10 %}Litt kjølig - ta med jakke!
+              {% elif 'sunny' in c or 'clear' in c %}Sola skinner - nyt dagen!
+              {% else %}Litt grått, men fint ute!{% endif %}
+            icon: >-
+              {% set c = states('weather.forecast_home') %}
+              {% if 'rain' in c or 'pour' in c %}mdi:umbrella
+              {% elif 'snow' in c %}mdi:snowflake
+              {% elif 'sunny' in c or 'clear' in c %}mdi:weather-sunny
+              {% else %}mdi:tshirt-crew{% endif %}
+            icon_color: >-
+              {% set c = states('weather.forecast_home') %}
+              {% if 'rain' in c or 'pour' in c %}blue
+              {% elif 'snow' in c %}light-blue
+              {% elif 'sunny' in c or 'clear' in c %}amber{% else %}grey{% endif %}
+          - type: custom:mushroom-template-card
+            primary: >-
+              {% set tips = [
+                'Husk å smile til noen i dag',
+                'Drikk nok vann',
+                'Pust dypt og ta det med ro',
+                'Gjør noe hyggelig for deg selv i dag',
+                'En liten gåtur gjør underverker',
+                'Ring en du er glad i',
+                'Nyt en ekstra god kopp kaffe',
+                'Ta en pause når du trenger det',
+                'Del et smil - det smitter',
+                'Husk: du gjør så godt du kan'] %}
+              {{ tips[now().timetuple().tm_yday % tips | length] }}
+            icon: mdi:lightbulb-on-outline
+            icon_color: yellow
+
+      # ---- hourly (centerpiece) ----
+      - type: custom:hourly-weather
+        view_layout: {grid-area: hourly}
+        entity: weather.forecast_home
+        name: Neste timer
+        num_segments: 9
+        show_temperature: true
+        show_precipitation: true
+        label_spacing: "2"

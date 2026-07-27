@@ -36,3 +36,9 @@ lovelace:
       icon: mdi:home
       filename: dashboards/home.yaml
       show_in_sidebar: true
+    hallway-day:
+      mode: yaml
+      title: Hallway
+      icon: mdi:coat-rack
+      filename: dashboards/hallway.yaml
+      show_in_sidebar: false
