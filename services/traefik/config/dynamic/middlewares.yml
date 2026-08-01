@@ -8,7 +8,17 @@ http:
       ipAllowList:
         sourceRange:
           - "192.168.0.0/16"      # All 192.168.x.x private networks
-          - "193.71.242.0/24"     # Your actual source network
+          # Own WAN address only. Needed for LAN clients that resolve a
+          # punsvik.net name via public DNS instead of Blocky: the request
+          # hairpins out to the router and back, which SNATs the source to the
+          # WAN address, so Traefik sees this rather than a 192.168.x.x.
+          # Was 193.71.242.0/24, which trusted ~254 unrelated addresses on the
+          # ISP's block with access to every internal-only service.
+          # NOTE: this is a *dynamic* address (see services/ddns-updater). If the
+          # ISP reassigns it, hairpinning clients get 403 until this is updated.
+          # The real fix is making every client resolve via Blocky, after which
+          # this entry can be dropped entirely.
+          - "193.71.242.4/32"     # Own WAN address
           - "172.16.0.0/12"       # Docker networks
           - "10.0.0.0/8"          # Private class A
           - "127.0.0.1/32"        # Localhost
