@@ -1,4 +1,11 @@
 {
+  // LF everywhere. .gitattributes enforces this at the git layer, but the
+  // working tree is an SMB mount that Docker reads directly, so the editor
+  // must not write CRLF in the first place. Without this, VS Code on Windows
+  // uses the OS default for new files.
+  "files.eol": "\n",
+  "files.insertFinalNewline": true,
+  "files.trimTrailingWhitespace": true,
   "yaml.customTags": [
     "!include scalar",
     "!include_dir_list scalar",

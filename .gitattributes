@@ -1,0 +1,47 @@
+# Line-ending policy: LF in the repository AND in the working tree.
+#
+# This working tree is not a private checkout. Drive L: on Windows is an SMB
+# mount of /mnt/main/homelab on the NAS, so these exact bytes are what Docker,
+# Traefik, Blocky and the rest read at runtime. LF is a runtime requirement
+# here, not a style preference.
+#
+# That is why every rule below says `eol=lf` rather than just `text=auto`.
+# `text=auto` alone normalises what goes *into* the repo but still lets Git for
+# Windows write CRLF into the working tree on checkout. `eol=lf` pins both.
+#
+# Git for Windows ships `core.autocrlf=true` at the *system* level, while WSL's
+# git has nothing set. Two gits, one shared working tree, opposite rules — that
+# is what produced ~40 phantom "modified" files. .gitattributes overrides
+# core.autocrlf for both, so they now agree. Keep this file committed; the
+# per-clone git config cannot travel and will not protect a fresh clone.
+
+* text=auto eol=lf
+
+# Called out explicitly — these are the ones where CRLF actively breaks things
+# rather than merely creating diff noise. A CRLF shebang makes the kernel look
+# for an interpreter named "/bin/sh\r", which fails with a confusing ENOENT.
+*.sh         text eol=lf
+Dockerfile   text eol=lf
+*.yml        text eol=lf
+*.yaml       text eol=lf
+
+# PowerShell is Windows-only, but PS 5.1 and 7 both parse LF without complaint,
+# so it stays on the single repo-wide rule rather than adding a second axis of
+# drift. Change to `eol=crlf` if a signed-script or ISE workflow ever needs it.
+*.ps1        text eol=lf
+
+# Safety net so a future binary asset is never mangled by normalisation.
+# `text=auto` already detects most of these, but being explicit is free.
+*.png  binary
+*.jpg  binary
+*.jpeg binary
+*.gif  binary
+*.ico  binary
+*.pdf  binary
+*.zip  binary
+*.gz   binary
+*.woff binary
+*.woff2 binary
+*.ttf  binary
+*.db   binary
+*.sqlite binary
