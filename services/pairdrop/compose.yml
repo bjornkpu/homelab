@@ -1,0 +1,51 @@
+# PairDrop - AirDrop-style device-to-device transfer.
+# https://github.com/schlagmichdoch/PairDrop
+#
+# LAN-only by design. Transfers are peer-to-peer over WebRTC and never touch
+# the NAS, so there is no dataset and no persistent storage here — the server
+# only does WebSocket signalling.
+#
+# Scoped to the LAN deliberately: cross-network transfers would need either a
+# coturn TURN server (extra container + UDP port forwards) or WS_FALLBACK=true,
+# which relays traffic through the NAS and thereby throws away the whole point
+# of P2P. Pingvin Share (share.punsvik.net) covers the remote case instead.
+#
+# Peer discovery groups clients by IP. server/peer.js collapses every RFC1918
+# address to 127.0.0.1, so all LAN devices land in one room and see each other
+# even though each presents a distinct 192.168.1.x to Traefik. That grouping
+# depends on Traefik's X-Forwarded-For — without it every client on earth would
+# share one room. No ports are published, so the proxy cannot be bypassed.
+
+services:
+  pairdrop:
+    image: ghcr.io/schlagmichdoch/pairdrop:${PAIRDROP_IMAGE_TAG:-v1.9.4}
+    container_name: pairdrop
+    restart: unless-stopped
+    # The v1.9.4 ghcr image ships the app correctly but its metadata inherited
+    # the Node base image's defaults (ENTRYPOINT docker-entrypoint.sh, CMD node)
+    # instead of the repo Dockerfile's `npm start`. Bare `node` opens a REPL,
+    # which exits 0 with no output on a TTY-less container — the symptom is a
+    # silent restart loop and an empty `docker logs`. Upstream's own compose
+    # sidesteps this by recommending lscr.io/linuxserver/pairdrop; this override
+    # keeps us on the first-party image and stays correct if they fix the tag.
+    command: ["node", "index.js"]
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.pairdrop.rule=Host(`drop.punsvik.net`)"
+      - "traefik.http.routers.pairdrop.entrypoints=websecure"
+      - "traefik.http.routers.pairdrop.tls.certresolver=le"
+      - "traefik.http.routers.pairdrop.middlewares=security-headers@file,internal-only@file"
+      - "traefik.http.services.pairdrop.loadbalancer.server.port=3000"
+    environment:
+      # Peers are all on the trusted LAN; the limiter mainly risks throttling
+      # legitimate signalling during a burst of transfers.
+      RATE_LIMIT: "false"
+      WS_FALLBACK: "false"
+      DEBUG_MODE: "false"
+    networks:
+      - traefik
+
+networks:
+  traefik:
+    external: true
+    name: traefik

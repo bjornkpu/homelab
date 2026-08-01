@@ -1,0 +1,44 @@
+# Pingvin Share X - Self-hosted WeTransfer alternative.
+# https://github.com/smp46/pingvin-share-x
+#
+# Fork of stonith404/pingvin-share, which was archived 2026-05-18 when its
+# author moved to Pocket ID full-time. The fork is the maintained line.
+#
+# Publicly reachable (no internal-only middleware) — that's the point: share
+# links must work for people outside the LAN. Upload side is locked down by
+# disabling registration and requiring login; download links stay anonymous.
+#
+# First-run:
+#   1. Visit https://share.punsvik.net — the first account created becomes admin.
+#   2. Admin → Configuration → Share → disable "Allow registration".
+#   3. Wire Pocket ID: see services/pingvin-share/README.md.
+#
+# Deliberately NOT using rate-limit@file: chunked uploads fire one request per
+# chunk, so a multi-GB upload would trip the 100 req/min average.
+
+services:
+  pingvin-share:
+    image: ghcr.io/smp46/pingvin-share-x:${PINGVIN_SHARE_IMAGE_TAG:-v1.21.2}
+    container_name: pingvin-share
+    restart: unless-stopped
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.pingvin-share.rule=Host(`share.punsvik.net`)"
+      - "traefik.http.routers.pingvin-share.entrypoints=websecure"
+      - "traefik.http.routers.pingvin-share.tls.certresolver=le"
+      - "traefik.http.routers.pingvin-share.middlewares=security-headers@file"
+      - "traefik.http.services.pingvin-share.loadbalancer.server.port=3000"
+    environment:
+      TRUST_PROXY: "true"
+      PUID: "568"
+      PGID: "568"
+    volumes:
+      - /mnt/main/appdata/pingvin-share/data:/opt/app/backend/data
+      - /mnt/main/appdata/pingvin-share/data/images:/opt/app/frontend/public/img
+    networks:
+      - traefik
+
+networks:
+  traefik:
+    external: true
+    name: traefik

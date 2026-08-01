@@ -166,6 +166,20 @@
             siteMonitor: https://changedetection.punsvik.net
             server: truenas
             container: ix-change-detection-change-detection-1
+      - Pingvin Share:
+            icon: mdi-share-variant
+            href: https://share.punsvik.net
+            description: Send big files via expiring links
+            siteMonitor: https://share.punsvik.net
+            server: truenas
+            container: pingvin-share
+      - PairDrop:
+            icon: pairdrop.png
+            href: https://drop.punsvik.net
+            description: AirDrop-style transfers [LAN only]
+            siteMonitor: https://drop.punsvik.net
+            server: truenas
+            container: pairdrop
       - ntfy:
             icon: mdi-bell-ring
             href: https://ntfy.punsvik.net
