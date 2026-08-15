@@ -28,6 +28,13 @@
             siteMonitor: https://radarr.punsvik.net
             server: truenas
             container: radarr
+      - Bazarr:
+            icon: bazarr.png
+            href: https://bazarr.punsvik.net
+            description: Subtitle downloader
+            siteMonitor: https://bazarr.punsvik.net
+            server: truenas
+            container: bazarr
       - Shelfmark:
             icon: mdi-bookshelf
             href: https://shelfmark.punsvik.net
