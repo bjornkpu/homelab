@@ -1,0 +1,17 @@
+# FlareSolverr - Cloudflare challenge solver for Prowlarr
+# https://github.com/FlareSolverr/FlareSolverr
+#
+# Shares gluetun's network namespace so the Cloudflare clearance cookies
+# it solves come from the same exit IP Prowlarr searches from. On the
+# traefik network instead, every solved cookie would be rejected.
+# Start gluetun first. No UI worth exposing, so no Traefik route.
+
+services:
+  flaresolverr:
+    image: ghcr.io/flaresolverr/flaresolverr:latest
+    container_name: flaresolverr
+    restart: unless-stopped
+    network_mode: "container:gluetun"
+    environment:
+      - LOG_LEVEL=info
+      - TZ=Europe/Oslo
