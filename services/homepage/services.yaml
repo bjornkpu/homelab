@@ -80,8 +80,10 @@
       - Shopping List:
             icon: mdi-cart-outline
             href: https://shopping-list.furuknappen.no
-            description: Shared shopping lists [K8s]
+            description: Shared shopping list
             siteMonitor: https://shopping-list.furuknappen.no
+            server: truenas
+            container: shopping-list
       - NocoDB:
             icon: nocodb.png
             href: https://db.furuknappen.no
@@ -140,11 +142,6 @@
             siteMonitor: https://supabase.furuknappen.no
             server: truenas
             container: supabase-studio
-      - PocketBase:
-            icon: pocketbase.png
-            href: https://db.shopping-list.furuknappen.no/_/#/login
-            description: Backend for Shopping List [K8s]
-            siteMonitor: https://db.shopping-list.furuknappen.no/_/#/login
       - Umami:
             icon: umami.png
             href: https://analytics.furuknappen.no
