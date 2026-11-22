@@ -34,6 +34,7 @@ services/home-assistant/home-assistant_v2.db*
 services/home-assistant/backups/
 services/home-assistant/image/
 services/home-assistant/secrets.yaml
+services/home-assistant/ip_bans.yaml
 # app-managed: TrueNAS injects the Postgres db_url (password in cleartext) on every deploy
 services/home-assistant/configuration.yaml
 services/home-assistant/HCQROA~F

@@ -7,6 +7,9 @@
 #
 # Do NOT use `!secret` for db_url: the app overwrites that line on deploy and HA
 # drops into recovery mode.
+#
+# Keep `http:` inline, never `!include`: the app injects http.server_port on
+# deploy and mangles an `!include` line into an invalid config (crash loop).
 
 default_config:
 tts:
@@ -19,7 +22,14 @@ recorder:
   commit_interval: 3
   db_url: postgresql://home-assistant:REDACTED@postgres:5432/home-assistant?sslmode=disable
 google_assistant: !include google_assistant.yaml
-http: !include http.yaml
+http:
+  server_port: 8123
+  use_x_forwarded_for: true
+  trusted_proxies:
+    - 192.168.1.4
+    - 172.16.0.0/12
+  ip_ban_enabled: true
+  login_attempts_threshold: 5
 homeassistant:
   packages: !include_dir_named packages
 lovelace:
